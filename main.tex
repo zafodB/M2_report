@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage[inline]{enumitem}
+\usepackage[left=2.54cm,top=3cm,right=2.54cm,bottom=3cm]{geometry}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\usepackage[sorting=none, style=numeric-comp]{biblatex}
+
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage{framed}
+\usepackage{listings}
+\usepackage{epigraph}
+% \usepackage[table]{xcolor}
+\usepackage[acronym,toc]{glossaries}
+
+\renewcommand{\arraystretch}{1.15}
+
+
+\graphicspath{ {00images/} }
+\DeclareGraphicsExtensions{.png,.PNG,.pdf}
+% \DeclareGraphicsExtensions{.pdf,.png,.PNG} % - CHANGE TO THIS
+
+\addbibresource{references.bib}
+\setlength{\parindent}{1cm}
+
+% Acronyms %%%%%%%%
+\makeglossaries
+
+\newacronym{xacml}{XACML}{eXtensible Access Control Markup Language}
+\newacronym{pdp}{PDP}{Policy Decision Point}
+% \newacronym{}{}{}
+% \newacronym{}{}{}
+% \newacronym{}{}{}
+% \newacronym{}{}{}
+% \newacronym{}{}{}
+% \newacronym{}{}{}
+% \newacronym{}{}{}
+% \newacronym{}{}{}
+
+\makeglossaries
+
+%%%%%%%%%%%%%%%%%%% 
+
+\begin{document}
+
+% \includepdf{cover_page}
+% \includepdf{page_zero}
+\tableofcontents
+
+\begin{singlespacing}
+\setglossarystyle{long}
+\printglossary[type=\acronymtype, title=List of acronyms and abbreviations, toctitle=List of acronyms and abbreviations, nonumberlist]
+\printglossary
+\end{singlespacing}
+
+% \include{01Introduction/introduction}
+% \pagebreak
+\include{03background/00background}
+\pagebreak
+\include{10Conclusion/00conclusion}
+\pagebreak
+
+\printbibliography[heading=bibintoc]
+
+% \epigraph{Smart contracts are neither smart, nor contracts!}{\textit{www.stateofthedapps.com/about}}
+
+\pagebreak
+
+% \appendix
+% \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
+% \input{15Appendixes/00apendixA}
+% \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
+% \input{15Appendixes/01apendixB}
+% \newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,footskip=.4cm}
+% \input{15Appendixes/02apendixC}
+% \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
+% \input{15Appendixes/03apendixD.tex}
+% \restoregeometry
+
+\end{document}
