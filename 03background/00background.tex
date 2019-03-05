@@ -5,9 +5,12 @@
 \subsection{Basic terms}
 
 \paragraph{Policy}
+The IT portfolio of many current enterprises consists of a variety of different applications and systems. As a fine grained control of users' access to these resources is required, management of access rights for every user can become tedious. A set of rules is usually in place, which specify how a \textit{subject} (a person, user, actor) can interact with an \textit{object} (system, program), describing subject's accountability and capabilities within the object~\cite{Feltus2008PreliminaryConcept}. Policies are often used in the \hyperref[sec:xacml]{XACML} context.
 
-The IT portfolio of many current enterprises consists of a variety of different applications and systems. As a fine grained control of users' access to these resources is required, management of access rights for every user can become tedious. A set of rules is usually in place, which specify how a \textit{subject} (a person, user, actor) can interact with an \textit{object} (system, program), describing subject's accountability and capabilities within the object.
-% REFERENCE "Preliminary Literature Review of Policy Engineering Methods; Toward Responsibility Concept"
+\paragraph{Assertion}
+An assertion is a ``confident and forceful statement of fact or belief''\footnotemark. In the context of authentication and in particular \hyperref[sec:saml]{SAML}, it is often the case that the identity provider is an independent entity, logically and physically separated from the application/relying party that requested user authentication. After the identity provider authenticates the user, it issues an assertion, confirming that the user's identity has been verified.
 
+\footnotetext{\url{https://en.oxforddictionaries.com/definition/assertion}, accessed 05 March 2019}
 
 \input{03background/01xamcl}
+\input{03background/02saml}
