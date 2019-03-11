@@ -18,15 +18,15 @@ The guidelines define a Digital Identity Model (Figure~\ref{fig:nist-model}), wh
  \begin{figure}[ht]
     \centering
     % TODO Change figure in visio
-    \includegraphics[width=.95\textwidth]{nist-model}
-    \caption{Digital Identity Model. Taken from.
+    \includegraphics[width=.95\textwidth]{nist-simplified}
+    \caption{Digital Identity Model (simplified). The left side of the figure represents enrolment of the user with the \acrshort{csp}. The right part of the user represents authentication with the verifier, before an authenticated session is established between the user and the \acrshort{rp}. Taken from (edited).
     % %REFERENCE Digital identity guidelines: revision 3
     }
     \label{fig:nist-model}
 \end{figure}
 
 \paragraph{SP 800-63A}
-This volume of the Digital Identity Guidelines defines three Identity Assurance Levels (IALs) and requirements on identity proofing for each level. The \acrshort{ial}1 requires no verification of assertions provided by the user. \acrshort{ial}2 requires either remote or physically-present verification of assertions made by the user, while \acrshort{ial}3 requires manual verification by a trained person, representing the \acrshort{csp}/
+This volume of the Digital Identity Guidelines defines three Identity Assurance Levels (IALs) and requirements on identity proofing for each level. The \acrshort{ial}1 requires no verification of assertions provided by the user. \acrshort{ial}2 requires either remote or physically-present verification of assertions made by the user, while \acrshort{ial}3 requires manual verification by a trained person, representing the \acrshort{csp}.
 
 % REFERENCE Digital identity guidelines: enrollment and identity proofing
 
@@ -42,7 +42,9 @@ must be used.
 In AAL3, a hardware-based authenticator must be used in addition to requirements of AAL2. Furthermore, one of the authenticators used must be resistant to attacks attempting to impersonate the user.
 
 \paragraph{SP 800-63C}
-
-% TODO WRITE HERE
+The C volume of the guidelines describes the use of assertions for identity federation across several \acrshort{rp}s. This enables the user to use services provided by several \acrshort{rp}s, while maintaining only a single identity at one \acrshort{idp}. The volume also describes three Federation Assurance Levels, however we do not cover these in this report.
+% REFERENCE Digital identity guidelines: federation and assertions
 
 \paragraph{Authenticator types}
+
+% TODO WRITE HERE
