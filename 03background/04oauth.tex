@@ -2,11 +2,7 @@
 
 Before existence of OAuth, the access to user's protected resources was commonly delegated to a third party by sharing the user's credentials with that third party. This approach has flaws, since it is not possible for the user to fine-tune the access to their account, neither across different third parties, nor for different access levels of any given third party. 
 
-The OAuth 1.0 was published in 2010 as to address this problem 
-% REFERENCE The OAuth 1.0 Protocol
-and was followed in 2012 by OAuth 2.0. 
-% REFERENCE The OAuth 2.0 Authorization Framework
-OAuth 2.0 is a Proposed Standard, is not compatible with version 1.0 and is widely used today. In the following sections of this report we will refer to OAuth 2.0.
+The OAuth 1.0 was published in 2010 as to address this problem~\cite{Hammer-Lahav2010TheProtocol} and was followed in 2012 by OAuth 2.0~\cite{Hardt2012TheFramework}. OAuth 2.0 is a Proposed Standard, is not compatible with version 1.0 and is widely used today. In the following sections of this report we will refer to OAuth 2.0.
 
 In OAuth, the third party requesting access to user's protected resources is known as the \textit{client}. The server controlling the protected resources has an authorisation server associated with it. To gain access to the resources, the client needs to first liaise with the authorisation server to obtain an \textit{access token} (also known as the bearer token). This token is then used to access the resource.
 
