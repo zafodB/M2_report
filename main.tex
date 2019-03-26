@@ -16,6 +16,9 @@
 \usepackage{framed}
 \usepackage{listings}
 \usepackage{epigraph}
+% To have two column glossary
+% \usepackage[acronym,toc,nogroupskip,nopostdot]{glossaries}
+% \usepackage{glossary-mcols}
 % \usepackage[table]{xcolor}
 \usepackage[acronym,toc]{glossaries}
 
@@ -43,21 +46,24 @@
 \tableofcontents
 
 \begin{singlespacing}
+
+% To have two column glossary
+%\setglossarystyle{mcolindex}
 \setglossarystyle{long}
 \printglossary[type=\acronymtype, title=List of acronyms and abbreviations, toctitle=List of acronyms and abbreviations, nonumberlist]
 \printglossary
 \end{singlespacing}
 
-% \include{01Introduction/introduction}
-% \pagebreak
-% \include{02ProblemFormulation/problemFormulation}
-% \pagebreak
-% \include{03background/00background}
-% \pagebreak
+\include{01Introduction/introduction}
+\pagebreak
+\include{02ProblemFormulation/problemFormulation}
+\pagebreak
+\include{03background/00background}
+\pagebreak
 \include{04sota/00sota}
 \pagebreak
-% \include{05analysis/00analysis}
-% \pagebreak
+\include{05analysis/00analysis}
+\pagebreak
 
 \printbibliography[heading=bibintoc]
 
