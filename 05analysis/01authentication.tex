@@ -13,6 +13,14 @@ In the online authentication, we can see that the systems support a wider range 
 
 In the proposed hybrid access control system, we must therefore provide an authenticator, that is both fast to use and can be easily complemented and/or substituted with another authentication method if lost or forgotten. We propose the combination of FIDO2 key with \acrshort{nfc} (primary authenticator) and FIDO2 enabled smartphone (supplementary authenticator) to meet the above mentioned criteria. The FIDO2 key with NFC support offers proximity-card-like usability (the user needs to swipe/hold the key next to the reader). If lost or forgotten, it can be substituted by an FIDO2 enabled smartphone, as people generally carry a smartphone with them, while at work.
 
+% TODO FIDO2 would be used for all 4 boxes from access control breakdown chart
+
+% TODO How OpenID connect is used for authentication/SSO
+% TODO What information needs to be shared (Default OIDC scope - name, email, UID)...?
+% TODO What entities will be needed (OID provider)
+% TODO OpenID connect would be used only for boxes 3 and 4 from access control breakdown chart
+
+
 % For \acrlong{aal}s 2 and 3 defined in 
 % %  REFERENCE SECURITY REQUIREMENTS FOR CRYPTOGRAPHIC MODULES
 % , authentication must be carried out using at least two independent factors. This requirement, together with abandonment of memorised secrets results in adoption of new authenticators. These  authenticators should offer at better security as memorised secrets, while maintaining the same level of accessibility. In 
