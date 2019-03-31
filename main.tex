@@ -18,10 +18,10 @@
 \usepackage{listings}
 \usepackage{epigraph}
 % To have two column glossary
-% \usepackage[acronym,toc,nogroupskip,nopostdot]{glossaries}
-% \usepackage{glossary-mcols}
+\usepackage[acronym,toc,nogroupskip,nopostdot]{glossaries}
+\usepackage{glossary-mcols}
 % % \usepackage[table]{xcolor}
-\usepackage[acronym,toc]{glossaries}
+%\usepackage[acronym,toc]{glossaries}
 
 \renewcommand{\arraystretch}{1.15}
 
@@ -49,22 +49,20 @@
 \begin{singlespacing}
 
 % To have two column glossary
-%\setglossarystyle{mcolindex}
-\setglossarystyle{long}
+\setglossarystyle{mcolindex}
+% \setglossarystyle{long}
 \printglossary[type=\acronymtype, title=List of acronyms and abbreviations, toctitle=List of acronyms and abbreviations, nonumberlist]
 \printglossary
 \end{singlespacing}
 
-% \include{01Introduction/introduction}
+% \include{01Introduction/00introduction}
 % \pagebreak
-% \include{02ProblemFormulation/problemFormulation}
+% \include{03background/00background}
 % \pagebreak
-\include{03background/00background}
+% \include{04sota/00sota}
+% \pagebreak
+\include{05analysis/00analysis}
 \pagebreak
-\include{04sota/00sota}
-\pagebreak
-% \include{05analysis/00analysis}
-% \pagebreak
 
 \printbibliography[heading=bibintoc]
 
@@ -72,9 +70,9 @@
 
 \pagebreak
 
-% \appendix
+\appendix
 % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
-% \input{15Appendixes/00apendixA}
+\input{99appendix/01links}
 % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
 % \input{15Appendixes/01apendixB}
 % \newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,footskip=.4cm}

@@ -1,6 +1,24 @@
-% TODO OAuth scopes (SOTA)
-% TODO Why we choose OAuth
-% TODO Which scopes need to be included
-% TODO Which entities will be needed to support this (Authorisation server)
+\subsection{Authorisation}
 
-% TODO OAuth will be used for boxes 3 and 4 from access control breakdown chart
+When someone is authorise to use a system it means they have permission to access that system. However, in enterprise access control scenario, there are more concepts associated with authorisation than just verifying that a user is allowed to use a certain system. The support for federated identity and ability to handle \acrfull{sso} are typically design parameters that fall under the broader authorisation scope.
+
+We can assume that an enterprise operates a variety of different IT systems, some of which may operate within the enterprise's security realm, while others may be \acrshort{saas} or may be operated by a business partner. To avoid an employee needing to manage several sets of credentials (one for each system owner), federated identity is used. The access control system in an enterprise needs to be able to integrate with business systems to enable the use of federated identity across the enterprise.
+
+Once we acknowledge that a user can use one account (i.e. one set of credentials) to log in to both internal and external applications, the next step is to minimise the necessity to enter this set of credentials over and over again, as the user logs into different systems, without compromising the security of these systems. Single sign on addresses this need. Using a single sign on in the access control system, we could for example specify, that the user only needs to authenticate with their credentials once per two hours on a single machine. Once the user has authenticated, all the following requests to log in to any system, using user's federated identity will be carried out without prompting the user to authenticate again, until the time limit has expired. This increases the convenience for the user.
+
+For the proposed access control system, we consider two solutions as most plausible -- \acrshort{saml} and the OAuth + OpenID Connect combination. Business applications that support federated identity integration, tend to support at least one of these technologies. While we could not find statistics comparing the use of the two in enterprises, we found examples of applications supporting both \acrshort{saml} and OAuth + OpenID Connect and examples of applications that only support \acrshort{saml} (see Appendix~\ref{sec:appendix-links} for details). 
+
+By some, \acrshort{saml} is considered as the enterprise-oriented technology, while OAuth and OpenID connect are considered oriented on the consumer market~\cite{Fagbemi2016ComparingWS-Federation, SoftwareSecured2016Differentiating2, OneLoginInc.SAMLOAuth}.
+
+OAuth and OpenID Connect have been published 7 and 9 years after \acrshort{saml} (respectively). It is therefore understandable, that \acrshort{saml} is still widely present on the market. However, both technologies can be used in an enterprise environment, as noted by~\cite{Naik2017SecuringConnect} and some even encourage the use of OAuth + OpenID Connect as the preferred way for new applications~\cite{barbkess2019SingleDirectory}.
+
+Advantages of \acrshort{saml} include speed, identity-provider-initiated \acrshort{sso} and wide adoption~\cite{OneLoginInc.SAMLOAuth, Naik2017SecuringConnect}. The weaknesses are the limited support for mobile/native applications and heavy weight of the protocol (due to XML)~\cite{Naik2017SecuringConnect}. Conversely, the advantages of OAuth in combination with OpenID connect include better support for mobile and native applications, and more light-weight and REST-friendly protocol~\cite{Naik2017SecuringConnect}. There exists a proposal to improve the speed of OAuth in an enterprise setting~\cite{Noureddine2011AEnterprise}.
+
+Because of better suitability for mobile and native applications, we propose OAuth + OpenID connect as the primary choice of authorisation and \acrshort{sso} protocols for internal enterprise applications and for external applications that support these technologies. Naturally, the system is likely to be integrated with internal legacy applications and external applications that do not support OAuth + OpenID connect for \acrshort{sso}. While a solution was proposed to enable OAuth functionality on legacy systems via \acrfull{esb}, this is not yet widely adopted and requires integration of an \acrshort{esb}~\cite{deSousaRibeiro2018AnBus}. Therefore the system should also support the \acrshort{saml} flow to accommodate these legacy systems.
+
+
+
+% maybe-TODO Which scopes need to be included
+% maybe-TODO Which entities will be needed to support this (Authorisation server)
+
+% maybe-TODO OAuth will be used for boxes 3 and 4 from access control breakdown chart
