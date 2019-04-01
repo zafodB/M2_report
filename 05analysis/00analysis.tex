@@ -1,16 +1,16 @@
-\section{Analysis}
+\section{Analysis}\label{sec:analysis}
 
-Building up on our initial idea and problem formulation, we determine two major functional areas that our must be supported by our proposed system:
+Building up on our initial idea and problem formulation, we determine two major functional areas that must be supported by our proposed system:
 
 \begin{itemize}[noitemsep]
     \item \textit{\acrfull{pacs}} (access to restricted premises in a company or institution, building access control etc.)
-    \item \textit{online access control} (access to computer systems, applications, online sign-in etc.)
+    \item \textit{Online Access Control} (access to computer systems, applications, online sign-in etc.)
 \end{itemize}
 
 While the  typical question in a \acrshort{pacs} would be ``\textit{Is the person allowed to enter beyond this point}?'', and can be controlled by a variety of physical barriers, doors, turn-sites and the like, the online access control is more complex. Enterprises nowadays operate a wide spectrum of software solutions including on-premise applications, legacy systems, cloud-based and \acrshort{saas} applications, internally or externally oriented \acrshort{api}s and databases. All of these require some level of access control. To break down this structure, we first begin by identifying two service classes:
 \begin{enumerate*}[label=(\roman*)]
     \item \textit{internal applications}, that sit within the enterprise security realm; and 
-    \item \textit{external applications}, that include cloud based software, \acrshort{saas} solutions and partner/vendor applications and which reside outside the given security realm.
+    \item \textit{external applications}, that include cloud based software, \acrshort{saas} solutions and partner/vendor applications, and which reside outside the given security realm.
 \end{enumerate*}
 
 The external applications can be further divided based on their interactions with the internal systems. Applications that are not business critical and/or are not integrated with the business processes may not require access to protected resources at all. Examples of such applications would be a lunch booking system or a company social network. These would be primarily used by the employees, but would not require connectors to business-critical systems and could therefore reside outside the security realm.
@@ -35,3 +35,5 @@ Multiple sources list Identification, Authentication and Authorisation as the th
 \input{05analysis/01authentication}
 
 \input{05analysis/02authorisation}
+
+\input{05analysis/03accessPolicyManagement}

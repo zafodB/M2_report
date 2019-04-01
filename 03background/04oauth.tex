@@ -1,4 +1,4 @@
-\subsection{OAuth 2.0} \label{OAuth_2}
+\subsection{OAuth 2.0} \label{sec:OAuth_2}
 
 Before existence of OAuth, the access to user's protected resources was commonly delegated to a third party by sharing the user's credentials with that third party. This approach has flaws, since it is not possible for the user to fine-tune the access to their account, neither across different third parties, nor for different access levels of any given third party. 
 
@@ -8,7 +8,7 @@ Using the OAuth framework, a third-party application may obtain a fine-grained a
 
 \paragraph{Client types} OAuth distinguishes three client types:
 \begin{itemize}[noitemsep]
-    \item \textit{Web based application} is an application that runs on a web server and communicates with the user over HTML via a browser. Web-based application is considered secure, as the user and application secrets can be stored on the web server.
+    \item \textit{Web-based application} is an application that runs on a web server and communicates with the user over HTML via a browser. Web-based application is considered secure, as the user and application secrets can be stored on the web server.
     \item \textit{User-agent-based application} is downloaded from the server, but afterwards runs on the user's device. This is considered less secure than web-based application, as any secrets could be potentially exposed by the user-agent (browser).
     \item \textit{Native application} is installed by the user and runs directly on user's device. It can offer good protection to secrets entered by the user during runtime, but any application secrets which are included and shipped with the application could be potentially exposed~\cite{Hardt2012TheFramework}.
 \end{itemize}
@@ -16,7 +16,7 @@ Using the OAuth framework, a third-party application may obtain a fine-grained a
 \paragraph{Grant types} Four grant types are defined by the standard. Not all grant types are suitable for all client types, but other parameters, such as desired level of security or preference are also parameters for the choice of the grant type. The defined types are as follows:
 
 \begin{itemize}[noitemsep]
-    \item \textit{Authorization Code Grant}. Using this grant type, the user is first directed from the web-based application to authenticate with the authorisation server. After user authenticates, they they are asked by the authorisation server to give consent for the client application to use the protected resources controlled by the user. Once the consent is given, the user agent receives an authorisation code from the authentication server. This authorisation code is passed to the web server via HTTP redirect method. The client running on the web server contacts the authorisation server with the authorisation code to obtain an access token. The access token is presented when the client application accesses the protected resource. This flow is illustrated in Figure~\ref{fig:oauth-code-grant}.
+    \item \textit{Authorisation Code Grant}. Using this grant type, the user is first directed from the web-based application to authenticate with the authorisation server. After user authenticates, they they are asked by the authorisation server to give consent for the client application to use the protected resources controlled by the user. Once the consent is given, the user agent receives an authorisation code from the authentication server. This authorisation code is passed to the web server via HTTP redirect method. The client running on the web server contacts the authorisation server with the authorisation code to obtain an access token. The access token is presented when the client application accesses the protected resource. This flow is illustrated in Figure~\ref{fig:oauth-code-grant}.
     \item \textit{Implicit Grant}. In this grant type, the client application is typically running in the user agent. The flow is similar to the one described above, but instead of the authorisation code, the access token is sent directly to the client application. This is simpler than the authorisation code grant, but less secure, since the access token can be captured by other applications residing on the user's device.
     \item \textit{Resource Owner Password Credentials Grant}. When using this grant type, user's credentials need to be shared directly with the client application. This is only suitable, if the client application is fully trusted by the user.
     \item \textit{Client Credentials Grant} is used when the client application requires access to own resources (as opposed to user's protected resources).
