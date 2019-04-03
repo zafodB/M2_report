@@ -1,0 +1,44 @@
+\subsection{Architecture}
+
+In this section we explain the entities of the proposed system and their roles. Afterwards, we present high-level sequence diagrams of the system for the basic use cases. We explain what messages flow among the system components and how these represent the individual authentication and authorisation flows explained in the \href{sec:analysis}{Analysis section}.
+
+\subsubsection{System Components}
+To best design the architecture of our system, we must first understand the different actors and their roles. Investigating the specifications of FIDO2, OAuth and \acrshort{oidc} might give us an idea of what the necessary components might be, but there is a degree in ambiguity in these specifications -- the problem being, that while each specification does a good job explaining details in its own context, in order to bring an access control system to life, we must understand where these contexts intersect each other.
+
+In FIDO2, the typical parties are \textit{authenticator}, \textit{client} and \textit{\acrshort{rp}}. In OAuth, we have the following entities: \textit{user agent}, \textit{client application} and \textit{authorisation server}. In \acrshort{oidc} we have \textit{relying party}, \textit{OIDC provider}, \textit{token endpoint} and so on. To avoid this naming overlap, we identify the following entities as our system components:
+% 
+\begin{itemize}
+    \item \textit{Client application} is the business application the user is about to use. If this is an internal application, it would typically have direct access to protected resources. If this is an external application, it would typically require an OAuth access token to access the protected resources.
+    
+    Client application can be either of the three client types that are recognised by the OAuth specification~\cite{Hardt2012TheFramework} -- web based application (running on a web server), user-agent-based application (downloaded from the web server, but executed locally) or a native application.
+    
+    Examples of client application are: Slack, Salesforce, ServiceNow or Zendesk.
+    
+    \item \textit{User agent} interacts with the user during login and authentication. It displays forms for username input and communicates with the physical authenticator device via CTAP2 protocol. This is typically a web browser. I should be able display HTML and handle the CTAP2 flow with the host OS. Principally, it could be both desktop- and mobile-based (currently only on the Android mobile platform). In the FIDO2 terminology, this would be `client' or `client device'.
+    
+    Examples are: Chrome, Mozilla, Microsoft Edge.
+    
+    \item \textit{\acrfull{aaserver}} is the core of the proposed access control system. As the name suggest, it handles the authentication and authorisation of the users. It communicates with the user agent, the client, the User DB and the \acrshort{pep}.
+    
+    
+    \paragraph{Authentication}
+    % TODO write abotu JWT/cookies in this part
+    The \acrshort{aaserver} is activated by an access request from a client or a \acrshort{pacs} system. This request contains the client ID, the callback URL and the requested scopes (if the client is an external application). If the request comes from a client, the \acrshort{aaserver} supplies a login form. The \acrshort{aaserver} extracts the \acrshort{uid} from the request/form and queries the User DB for a credential challenge for the credentials associated with this \acrshort{uid}. It sends this credential challenge to the client (or the \acrshort{pacs}) and awaits the credential challenge response. Once received, the \acrshort{aaserver} verifies with the User DB that the response is valid and comes from an authenticator associated with user's account.
+    
+    \paragraph{Policy verification}
+    The \acrshort{aaserver} proceeds to verify the access policy to the given application for the given user. It supplies the \acrshort{uid}, client ID, the requested scope and context information to the \acrshort{pep}.
+    
+    \paragraph{Access token issuance}
+    If the client is an external application and the \acrshort{pep} issued an `Allow access' decision, the \acrshort{aaserver} proceeds to issue an Authorisation code to the user agent (or to the client, if this is a native or user-agent-based application). Once the \acrshort{aaserver} receives the Authorisation code from the client, it issues an ID token, and optionally an Access token.
+    
+    If the client is an external application and the \acrshort{pep} issued an `Deny access' decision or if the client is an internal application or the \acrshort{pacs} system, the \acrshort{aaserver} relies the decision to the client/\acrshort{pacs}.
+    
+    \item \textit{User attribute database (or User DB)}
+    
+    \item \textit{Policy Enforcement Point (PEP)}
+    
+    \item \textit{Resource Endpoint}
+    
+    \item \textit{Userinfo Endpoint}
+\end{itemize}
+% 
