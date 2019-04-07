@@ -2,43 +2,67 @@
 
 In this section we explain the entities of the proposed system and their roles. Afterwards, we present high-level sequence diagrams of the system for the basic use cases. We explain what messages flow among the system components and how these represent the individual authentication and authorisation flows explained in the \href{sec:analysis}{Analysis section}.
 
-\subsubsection{System Components}
+\subsection{System Components}
 To best design the architecture of our system, we must first understand the different actors and their roles. Investigating the specifications of FIDO2, OAuth and \acrshort{oidc} might give us an idea of what the necessary components might be, but there is a degree in ambiguity in these specifications -- the problem being, that while each specification does a good job explaining details in its own context, in order to bring an access control system to life, we must understand where these contexts intersect each other.
 
 In FIDO2, the typical parties are \textit{authenticator}, \textit{client} and \textit{\acrshort{rp}}. In OAuth, we have the following entities: \textit{user agent}, \textit{client application} and \textit{authorisation server}. In \acrshort{oidc} we have \textit{relying party}, \textit{OIDC provider}, \textit{token endpoint} and so on. To avoid this naming overlap, we identify the following entities as our system components:
 % 
-\begin{itemize}
-    \item \textit{Client application} is the business application the user is about to use. If this is an internal application, it would typically have direct access to protected resources. If this is an external application, it would typically require an OAuth access token to access the protected resources.
+
+\subsubsection{Client application} 
+Client application is the business application the user is about to use. If this is an internal application, it would typically have direct access to protected resources. If this is an external application, it would typically require an OAuth access token to access the protected resources.
     
-    Client application can be either of the three client types that are recognised by the OAuth specification~\cite{Hardt2012TheFramework} -- web based application (running on a web server), user-agent-based application (downloaded from the web server, but executed locally) or a native application.
+Client application can be either of the three client types that are recognised by the OAuth specification~\cite{Hardt2012TheFramework} -- web based application (running on a web server), user-agent-based application (downloaded from the web server, but executed locally) or a native application.
     
-    Examples of client application are: Slack, Salesforce, ServiceNow or Zendesk.
+Examples of client application are: Slack, Salesforce, ServiceNow or Zendesk.
+
+\subsubsection{User agent}
+User agent interacts with the user during login and authentication. It displays forms for username input and communicates with the physical authenticator device via CTAP2 protocol. This is typically a web browser. I should be able display HTML and handle the CTAP2 flow with the host OS. Principally, it could be both desktop- and mobile-based (currently only on the Android mobile platform). In the FIDO2 terminology, this would be `client' or `client device'.
     
-    \item \textit{User agent} interacts with the user during login and authentication. It displays forms for username input and communicates with the physical authenticator device via CTAP2 protocol. This is typically a web browser. I should be able display HTML and handle the CTAP2 flow with the host OS. Principally, it could be both desktop- and mobile-based (currently only on the Android mobile platform). In the FIDO2 terminology, this would be `client' or `client device'.
+Examples are: Chrome, Mozilla, Microsoft Edge.
     
-    Examples are: Chrome, Mozilla, Microsoft Edge.
+\subsubsection{\acrlong{aaserver}} 
+The \acrfull{aaserver} is the core of the proposed access control system. As the name suggest, it handles the authentication and authorisation of the users. It communicates with the user agent, the client, the User DB and the \acrshort{pep}.
     
-    \item \textit{\acrfull{aaserver}} is the core of the proposed access control system. As the name suggest, it handles the authentication and authorisation of the users. It communicates with the user agent, the client, the User DB and the \acrshort{pep}.
+\paragraph{Authentication}
+% TODO write abotu JWT/cookies in this part
+The \acrshort{aaserver} is activated by an access request from a client or a \acrshort{pacs} system. This request contains the client ID, the callback URL and the requested scopes (if the client is an external application). If the request comes from a client, the \acrshort{aaserver} supplies a login form. The \acrshort{aaserver} extracts the \acrshort{uid} from the request/form and queries the User DB for a credential challenge for the credentials associated with this \acrshort{uid}. It sends this credential challenge to the client (or the \acrshort{pacs}) and awaits the credential challenge response. Once received, the \acrshort{aaserver} verifies with the User Directory that the response is valid and comes from an authenticator associated with user's account.
+
+\paragraph{Access Policy Evaluation}
+The \acrshort{aaserver} proceeds to verify the access policy to the given application for the given user. It supplies the \acrshort{uid}, client ID, the requested scope and context information to the \acrshort{pep}.
+
+\paragraph{Access token issuance}
+If the client is an external application and the \acrshort{pep} issued an `Allow access' decision, the \acrshort{aaserver} proceeds to issue an Authorisation code to the user agent (or to the client, if this is a native or user-agent-based application). Once the \acrshort{aaserver} receives the Authorisation code from the client, it issues an ID token, and optionally an Access token.
     
+If the \acrshort{pep} issued a `Deny access' decision, the \acrshort{aaserver} informs the application and the user that the access has been denied and does not issue any tokens. 
     
-    \paragraph{Authentication}
-    % TODO write abotu JWT/cookies in this part
-    The \acrshort{aaserver} is activated by an access request from a client or a \acrshort{pacs} system. This request contains the client ID, the callback URL and the requested scopes (if the client is an external application). If the request comes from a client, the \acrshort{aaserver} supplies a login form. The \acrshort{aaserver} extracts the \acrshort{uid} from the request/form and queries the User DB for a credential challenge for the credentials associated with this \acrshort{uid}. It sends this credential challenge to the client (or the \acrshort{pacs}) and awaits the credential challenge response. Once received, the \acrshort{aaserver} verifies with the User DB that the response is valid and comes from an authenticator associated with user's account.
+If the client is an internal application or the \acrshort{pacs} system, instead of issuing ID and access tokens, the \acrshort{aaserver} forwards the policy evaluation decision to the client.
+
+Furthermore, the \acrshort{aaserver} may also issue an access token to the client, via a client credential grant type. This is used when the client needs to access resources that are not associated with a particular user account and where the user is not involved in the process.
+
+Example of a similar system is Azure AD, discussed in Section~\ref{sec:online-access-control}.
     
-    \paragraph{Policy verification}
-    The \acrshort{aaserver} proceeds to verify the access policy to the given application for the given user. It supplies the \acrshort{uid}, client ID, the requested scope and context information to the \acrshort{pep}.
+\subsubsection{User directory}
+% TODO check consistent use accross report
+The user directory is a directory service that stores user attributes and can be accessed by the internal systems. The proposed access control system is integrated together with the enterprise user directory (i.e. it does not create a duplicate user directory only for the use in access control).
+
+In addition to standard user attributes (such as name, email, office phone, job title etc.), the user directory stores details about user's authenticators -- mainly the authenticator's public key. This entry is created when the authenticator is first registered and is used to verify whether the credential challenge for a particular user (received from the \acrshort{aaserver}) was signed by an authenticator belonging to this user. Further authenticator details stored in the directory could be the signature counter or a user-defined authenticator name.
+
+The user directory interacts with the \acrshort{aaserver} when it supplies authenticator challenges and verifies authenticator challenge responses. It further interacts with the \acrshort{pdp} where it supplies user attributes upon request.
+
+Examples of a user directory would be Active Directory\footnote{Active Directory by Microsoft is a subset of Azure AD described in Section~\ref{sec:online-access-control} on page~\pageref{sec:online-access-control}.} or the Apache Directory\footnote{\url{https://web.archive.org/web/20190407171447/https://directory.apache.org/}, accessed 07 April 2019.}
     
-    \paragraph{Access token issuance}
-    If the client is an external application and the \acrshort{pep} issued an `Allow access' decision, the \acrshort{aaserver} proceeds to issue an Authorisation code to the user agent (or to the client, if this is a native or user-agent-based application). Once the \acrshort{aaserver} receives the Authorisation code from the client, it issues an ID token, and optionally an Access token.
+\subsubsection{\acrlong{pdp}}
+The \acrfull{pdp} determines whether a given user us authorised to access a given application or pass through a given \acrshort{pacs} checkpoint. The \acrshort{pdp} stores the policies and when queried by the \acrshort{aaserver} it evaluates the relevant policy and issues an evaluation decision.
+
+It evaluates the policy based on user attributes, application attributes and optionally, additional context information (such as time or threat level). Some of these attributes are supplied by the \acrshort{aaserver} in the query. If these attributes are not sufficient to evaluate a policy, the \acrshort{pdp} can request additional information from the user directory or the \acrshort{aaserver}.
+
+Example of a solution that implements \acrshort{pdp} functionality is \href{sec:online-access-control}{Azure AD} or WSO2 Identity Server\footnote{\url{https://web.archive.org/web/20190407180021/https://docs.wso2.com/display/IS570/WSO2+Identity+Server+Documentation}, accessed 07 April 2019.}
     
-    If the client is an external application and the \acrshort{pep} issued an `Deny access' decision or if the client is an internal application or the \acrshort{pacs} system, the \acrshort{aaserver} relies the decision to the client/\acrshort{pacs}.
+\subsubsection{Resource Endpoint}
+The resource endpoint serves protected resources to external clients. This endpoint serves as the gateway for the external application to access the protected enterprise resources. These resources are divided into scopes the client must present a valid access token for the scope it is attempting to access. The scopes are defined as \acrshort{api}S, specifying the form of the request and response messages, and would likely be different for each enterprise.
     
-    \item \textit{User attribute database (or User DB)}
-    
-    \item \textit{Policy Enforcement Point (PEP)}
-    
-    \item \textit{Resource Endpoint}
-    
-    \item \textit{Userinfo Endpoint}
-\end{itemize}
+\subsubsection{UserInfo Endpoint}
+The UserInfo endpoint is a component as defined in
+% REFERENCE "Final: OpenID Connect Core 1.0 incorporating errata set 1"
+It serves claims about user attributes to external clients. The client must present a valid access token to receive the attributes of the associated user. The UserInfo Endpoint serves and an access point for clients outside the security perimeter, but it not store any user attributes itself. Instead, it queries the User Directory for any requested attributes every time such request is received.
 % 
