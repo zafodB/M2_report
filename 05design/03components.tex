@@ -1,8 +1,4 @@
-\subsection{Architecture}
-
-In this section we explain the entities of the proposed system and their roles. Afterwards, we present high-level sequence diagrams of the system for the basic use cases. We explain what messages flow among the system components and how these represent the individual authentication and authorisation flows explained in the \href{sec:analysis}{Analysis section}.
-
-\subsection{System Components}
+\subsection{Components}
 To best design the architecture of our system, we must first understand the different actors and their roles. Investigating the specifications of FIDO2, OAuth and \acrshort{oidc} might give us an idea of what the necessary components might be, but there is a degree in ambiguity in these specifications -- the problem being, that while each specification does a good job explaining details in its own context, in order to bring an access control system to life, we must understand where these contexts intersect each other.
 
 In FIDO2, the typical parties are \textit{authenticator}, \textit{client} and \textit{\acrshort{rp}}. In OAuth, we have the following entities: \textit{user agent}, \textit{client application} and \textit{authorisation server}. In \acrshort{oidc} we have \textit{relying party}, \textit{OIDC provider}, \textit{token endpoint} and so on. To avoid this naming overlap, we identify the following entities as our system components:
@@ -19,13 +15,17 @@ Examples of client application are: Slack, Salesforce, ServiceNow or Zendesk.
 User agent interacts with the user during login and authentication. It displays forms for username input and communicates with the physical authenticator device via CTAP2 protocol. This is typically a web browser. I should be able display HTML and handle the CTAP2 flow with the host OS. Principally, it could be both desktop- and mobile-based (currently only on the Android mobile platform). In the FIDO2 terminology, this would be `client' or `client device'.
     
 Examples are: Chrome, Mozilla, Microsoft Edge.
-    
+
 \subsubsection{\acrlong{aaserver}} 
 The \acrfull{aaserver} is the core of the proposed access control system. As the name suggest, it handles the authentication and authorisation of the users. It communicates with the user agent, the client, the User DB and the \acrshort{pep}.
     
 \paragraph{Authentication}
 % TODO write abotu JWT/cookies in this part
-The \acrshort{aaserver} is activated by an access request from a client or a \acrshort{pacs} system. This request contains the client ID, the callback URL and the requested scopes (if the client is an external application). If the request comes from a client, the \acrshort{aaserver} supplies a login form. The \acrshort{aaserver} extracts the \acrshort{uid} from the request/form and queries the User DB for a credential challenge for the credentials associated with this \acrshort{uid}. It sends this credential challenge to the client (or the \acrshort{pacs}) and awaits the credential challenge response. Once received, the \acrshort{aaserver} verifies with the User Directory that the response is valid and comes from an authenticator associated with user's account.
+The \acrshort{aaserver} is activated by an access request from a client or a \acrshort{pacs} system. This request contains the client ID, the callback URL and the requested scopes (if the client is an external application). If the request comes from a client, the \acrshort{aaserver} supplies a login form. The \acrshort{aaserver} extracts the \acrshort{uid} from the request/form and queries the User Directory for a credential challenge for this \acrshort{uid}. 
+
+It sends this credential challenge to the client, the \acrshort{pacs}, or the Authentication front end and awaits the credential challenge response. 
+
+Once received, the \acrshort{aaserver} verifies with the User Directory that the response is valid and comes from an authenticator associated with user's account.
 
 \paragraph{Access Policy Evaluation}
 The \acrshort{aaserver} proceeds to verify the access policy to the given application for the given user. It supplies the \acrshort{uid}, client ID, the requested scope and context information to the \acrshort{pep}.
@@ -41,6 +41,17 @@ Furthermore, the \acrshort{aaserver} may also issue an access token to the clien
 
 Example of a similar system is Azure AD, discussed in Section~\ref{sec:online-access-control}.
     
+\subsubsection{Authentication front end}
+The Authentication front end is used when the user selects to authenticate using FIDO2 on a smartphone. The Authentication front end is a middle layer between the \acrshort{aaserver} and the smartphone OS, which handles the CTAP2 protocol, and moderates the communication between these two parties.
+
+It receives Authentication Assertions\footnotemark from the \acrshort{aaserver} and presents these to the smartphone OS, which handles the signing process. Once signed, the Authentication front end returns the assertions to the \acrshort{aaserver}.
+% 
+\footnotetext{As defined by the WebAuthn specification: \url{https://www.w3.org/TR/webauthn/\#dictdef-publickeycredentialrequestoptions}, accessed 08 April 2019}
+
+The Authentication front end could be a native application, running directly on the smartphone OS, but could also be a browser-based application, if the browser is capable of relying the Authentication assertions to the OS\footnotemark.
+% 
+\footnotetext{Chrome and Firefox on Android support this use of WebAuthn.}
+
 \subsubsection{User directory}
 % TODO check consistent use accross report
 The user directory is a directory service that stores user attributes and can be accessed by the internal systems. The proposed access control system is integrated together with the enterprise user directory (i.e. it does not create a duplicate user directory only for the use in access control).
@@ -65,4 +76,6 @@ The resource endpoint serves protected resources to external clients. This endpo
 The UserInfo endpoint is a component as defined in
 % REFERENCE "Final: OpenID Connect Core 1.0 incorporating errata set 1"
 It serves claims about user attributes to external clients. The client must present a valid access token to receive the attributes of the associated user. The UserInfo Endpoint serves and an access point for clients outside the security perimeter, but it not store any user attributes itself. Instead, it queries the User Directory for any requested attributes every time such request is received.
-% 
+
+\bigskip\noindent
+Not all of the mentioned components are necessarily different physical entities, but we list them here separately as they perform a different function are logically independent. In the next section we describe the interactions between these components in more detail.
