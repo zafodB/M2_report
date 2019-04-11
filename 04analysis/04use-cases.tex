@@ -1,0 +1,24 @@
+\subsection{Use cases} \label{sec:analysis_useCases}
+Use cases are a valuable analysis technique for obtaining requirements subsequently. They represent actions of actors (humans, external systems) which can be performed within the system in order to achieve a goal. 
+
+To begin with, all actors interacting with the system are identified. The primary actor is a user - employee of an enterprise who is using a system to sign-in to a service or get access through a door. Administrator is a person who manages all employees and their enterprise digital identities as well as attributes and policies for accessing resources. On top of that he sets-up and manages connections with external system partners. On the other side, there are internal and external systems which the employee would like to access and are in need of basic information about the user to perform correctly, they may need also the access to protected resources.
+
+Having the knowledge of actors interacting with the system, current technologies, their working and analysis being done, the primary actions within the system can be defined. The following is the list of use cases identified from previous sections:
+
+\begin{enumerate}[noitemsep]
+    \item Sign-in to a system.
+    \item Authenticate to a \acrlong{pacs}.
+    \item Revoke an authenticator.
+    \item Set-up additional authenticator.
+    \item Set-up an account recovery method.
+    \item Manage users.
+    \item Manage user attributes.
+    \item Manage policies.
+    \item Manage client connections.
+    \item Access protected resources.
+\end{enumerate}
+
+In total ten use cases are identified as shown above. They are all crucial for the system to work properly and if even one on them is removed, the system would not be able to perform reliably and be used by a company. First two use cases come from the basis of this project, which tries to solve the access of employees to protected resources both online and on premise (\acrshort{uc}-1, 2). Once having an authenticator, it is vital to have a way to revoke it, in case it has been stolen or compromised (\acrshort{uc}-3). Adding additional authenticator is crucial for implementation of the system in highly secure facilities, where authentication with only one factor may not be enough (\acrshort{uc}-4). Following, if all authenticators are compromised, there should be a way of recovering the enterprise digital identity, therefore, adding a recovery method is essential (\acrshort{uc}-5). In order to keep the system updated and maintained, there should be a way of managing everything, that is the role of administrator who needs to be able to manage employees (\acrshort{uc}-6), manage their attributed so they can access various resources (\acrshort{uc}-7), manage the policies which determine who can access resources (\acrshort{uc}-8) and manage connections with external clients (\acrshort{uc}-9). Lastly, protected resources needs to be made available for systems, both internal and external, so they can function properly (\acrshort{uc}-10).
+
+% TODO Figure
+The following Use case diagram (Figure XYZ REF!) illustrates actions which can be performed by every actor in relation to the system visually and in greater detail.  

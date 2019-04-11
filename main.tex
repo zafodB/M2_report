@@ -12,7 +12,7 @@
 \usepackage{pdfpages}
 \usepackage{float}
 \usepackage{graphicx}
-\usepackage{tabularx}
+% \usepackage{tabularx}
 \usepackage{setspace}
 \usepackage{framed}
 \usepackage{listings}
@@ -24,12 +24,19 @@
 % % \usepackage[table]{xcolor}
 %\usepackage[acronym,toc]{glossaries}
 
+% skusam jak tabulku spravit :D
+\usepackage{colortbl}
+\usepackage{makecell}
+% \usepackage{hhline}
+% \usepackage{tabulary}
+% \usepackage{etoolbox}
+
 \renewcommand{\arraystretch}{1.15}
 
 
 \graphicspath{ {00images/} }
 \DeclareGraphicsExtensions{.png,.PNG,.pdf}
-% \DeclareGraphicsExtensions{.pdf,.png,.PNG} % - CHANGE TO THIS
+% \DeclareGraphicsExtensions{.pdf,.png,.PNG} % TODO- CHANGE TO THIS
 
 \addbibresource{references.bib}
 \setlength{\parindent}{1cm}
@@ -58,16 +65,19 @@
 \printglossary
 \end{singlespacing}
 
-% \include{01Introduction/00introduction}
-% \pagebreak
-% \include{02Methodology/00methodology}
-% \pagebreak
-% \include{03sota/000sota}
-% \pagebreak
-% \include{04analysis/00analysis}
-% \pagebreak
+\include{01Introduction/00introduction}
+\pagebreak
+\include{02Methodology/00methodology}
+\pagebreak
+\include{03sota/000sota}
+\pagebreak
+\include{04analysis/00analysis}
+\pagebreak
 \include{05design/00design}
 \pagebreak
+\include{09Discussion/00discussion}
+\pagebreak
+
 
 \printbibliography[heading=bibintoc]
 
@@ -75,11 +85,11 @@
 
 \pagebreak
 
-\appendix
+% \appendix
 % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
 % \input{99appendix/01links}
-% % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
-% % \input{15Appendixes/01apendixB}
+% \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
+% \input{99appendix/02xacml-figures}
 % % \newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,footskip=.4cm}
 % % \input{15Appendixes/02apendixC}
 % % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}

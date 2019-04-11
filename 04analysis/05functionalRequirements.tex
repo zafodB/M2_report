@@ -1,0 +1,64 @@
+\subsection{Requirements} \label{sec:analysis_requirements}
+The following section describes requirements, which has been collected from analysis and design and derived from use cases. Two kinds of requirements are presented, the functional and non-functional ones and all requirements are designed for the system being \acrlong{mvp} as there are many more functions which can be implemented in the system but are not vital for the smooth run and entry on the market. As the following are requirements for \acrshort{mvp}, all requirements are a must in for the implementation and therefore, no prioritisation method is is used. With the help of these requirements, the system can be designed. Additional functionalities will be discussed in the Discussion (Chapter XYZ).
+
+\subsubsection{Functional Requirements} \label{sec:analysis_functionalReqruiements}
+Functional requirements describe what should a system do, which features it should have and what tasks should be possible to be carried out. They are the ones which can be observed by a user and tried. The list of functional requirements along with requirement's ID, description and reference to where it was gotten from can be found in Table \ref{tab:functional_requirements}.
+
+\begin{table}[H]
+    \onehalfspacing
+    \centering
+    \begin{tabular}{|c|p{12cm}|c|}
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{ID}&\cellcolor[HTML]{CBCEFB}\textbf{Description}&\cellcolor[HTML]{CBCEFB}\textbf{Reference}\\
+    \hline
+    RQ-1&User must be able to authenticate with single-factor cryptographic device based on FIDO2 to use their enterprise digital identity.&-\\
+    \hline
+    RQ-2&User must be able to authenticate with smartphone using FIDO2 flow to use their enterprise digital identity.&-\\
+    \hline
+    \hline
+    RQ-3&User must be able to sign-in to internal system with their enterprise digital identity.&UC-1\\
+    \hline
+    RQ-4&User must be able to sign-in to external system with their enterprise digital identity.&UC-1\\
+    \hline
+    \hline
+    RQ-5&User must be able to open a door with their enterprise digital identity.&UC-2\\
+    \hline
+    \hline
+    RQ-6&User must be able to revoke their authenticator.&UC-3\\
+    \hline
+    RQ-7&Administrator must be able to revoke user’s authenticator.&UC-3\\
+    \hline
+    \hline
+    RQ-8&User must be able to register additional authenticator. (MFA???)&UC-4\\
+    \hline
+    RQ-9&Administrator must be able to register user’s authenticator.&UC-4\\
+    \hline
+    RQ-10&User must be able to set-up account recovery (e.g. combination of OTP, phone call, e-mail).&UC-5\\
+    \hline
+    \hline
+    RQ-11&Administrator must be able to create new enterprise digital identity.&UC-6\\
+    \hline
+    RQ-12&Administrator must be able to delete enterprise digital identity.&UC-6\\
+    \hline
+    \hline
+    RQ-13&Administrator must be able to manage attributes of users.&UC-7\\
+    \hline
+    \hline
+    RQ-14&Administrator must be able to set-up a policy.&UC-8\\
+    \hline
+    RQ-15&Administrator must be able to modify a policy.&UC-8\\
+    \hline
+    RQ-16&Administrator must be able to delete a policy.&UC-8\\
+    \hline
+    \hline
+    RQ-17&Administrator must be able to create new connections to external systems.&UC-9\\
+    \hline
+    \hline
+    RQ-18&Internal system must be able to access protected resources, when authorised to do so&UC-10\\
+    \hline
+    RQ-19&External system must be able to access protected resources, when authorised to do so&UC-10\\
+    \hline
+    \end{tabular}
+    \caption{List of functional requirements for the \acrshort{mvp} with the reference of where they are collected from.}
+    \label{tab:functional_requirements}
+\end{table}

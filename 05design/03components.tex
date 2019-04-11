@@ -1,8 +1,6 @@
 \subsection{Components}
 To best design the architecture of our system, we must first understand the different actors and their roles. In the FIDO2, OAuth and \acrshort{oidc} specifications there is a degree in ambiguity -- problem being, that while each specification explains details in its own context, the link to other parts of an \acrshort{acs} are not obvious. In this section we identify components of our system and clear this ambiguity by drawing the borders of each specification within the system.
-% 
 
-% TODO WORK HERE Access requesting party
 \subsubsection{Requester} 
 Requester is the system or application that is requesting access to protected resources on behalf of the user. Typically, this would be an internal or external client application, but it could also be a \acrshort{pacs}.
 
@@ -19,7 +17,7 @@ User agent does not act on its own, but instead hosts web-based and user-agent b
 % 
 \footnotetext{In the FIDO2 terminology, this would be called the \textit{client} or \textit{client device}.}
 
-Examples are: Chrome, Mozilla, Microsoft Edge.
+Examples are Chrome, Mozilla, Microsoft Edge.
 
 \subsubsection{\acrlong{aaserver}} 
 The \acrfull{aaserver} is the core of the proposed access control system. As the name suggest, it handles the authentication and authorisation of the users. It communicates with the user agent, the requester, the User directory and the \acrshort{pdp}.
@@ -48,27 +46,17 @@ Example of a similar system is Azure AD, discussed in Section~\ref{sec:online-ac
 \subsubsection{Authentication front end}
 The Authentication front end is used during user authentication, when the user selects to authenticate using FIDO2 on a smartphone. The Authentication front end is a middle layer between the \acrshort{aaserver} and the smartphone OS, which handles the CTAP2 protocol, and moderates the communication between these two parties.
 
-It receives Authentication Assertions\footnotemark from the \acrshort{aaserver} and presents these to the smartphone OS, which handles the signing process. Once signed, the Authentication front end returns the assertions to the \acrshort{aaserver}.
-% 
-\footnotetext{As defined by 
-% TODO reference "Web Authentication:An API for accessing Public Key Credentials Level 1"
-}
+It receives Authentication Assertions (as defined by~\cite{Balfanz2019Web1}) from the \acrshort{aaserver} and presents these to the smartphone OS, which handles the signing process. Once signed, the Authentication front end returns the assertions to the \acrshort{aaserver}.
 
 The Authentication front end could be a native application, running directly on the smartphone OS, but could also be a browser-based application, if the browser is capable of relying the Authentication assertions to the OS\footnotemark.
 % 
-\footnotetext{Currently Chrome on Android supports the use of WebAuthn and CTAP2.
-% TODO Reference: "Support for CTAP2 FIDO devices via the Web Authentication API"
-}
+\footnotetext{For example Chrome on Android supports the use of WebAuthn and CTAP2~\cite{ChromePlatformStatus2018SupportAPI}.}
 
 \subsubsection{User directory}
 % TODO check consistent use accross report
 The user directory is a directory service that stores user attributes and can be accessed by the internal systems. The proposed access control system uses the user directory to query attributes about users for authentication and policy evaluation purposes. It also serves attributes to the UserInfo endpoint, when queried.
 
-In addition to standard user attributes (such as name, email, office phone, job title etc.), the user directory stores details about user's authenticators -- the \texttt{credentialPublicKey}\footnotemark (authenticator's public key). This entry is created when the authenticator is first registered and is used to verify whether the credential challenge for a particular user was signed by an authenticator belonging to this user. Further authenticator details stored in the directory could be the signature counter or a user-defined authenticator name.
-% 
-\footnotetext{As defined by 
-% TODO reference "Web Authentication:An API for accessing Public Key Credentials Level 1"
-}
+In addition to standard user attributes (such as name, email, office phone, job title etc.), the user directory stores details about user's authenticators -- the \texttt{credentialPublicKey}(as defined by~\cite{Balfanz2019Web1}) (authenticator's public key). This entry is created when the authenticator is first registered and is used to verify whether the credential challenge for a particular user was signed by an authenticator belonging to this user. Further authenticator details stored in the directory could be the signature counter or a user-defined authenticator name.
 
 The user directory interacts with the \acrshort{aaserver} when it supplies authenticator challenges and verifies authenticator challenge responses. It further interacts with the \acrshort{pdp} where it supplies user attributes, if these are required by the \acrshort{pdp} to evaluate the policy.
 
@@ -81,6 +69,10 @@ The \acrfull{pdp} determines whether a given user or requester us authorised to 
 
 It evaluates the policy based on user/requester attributes, and optionally, additional context information. Some of these attributes are supplied by the \acrshort{aaserver} in the query. If these attributes are not sufficient to evaluate a policy, the \acrshort{pdp} can request additional information from the user directory or the \acrshort{aaserver}.
 
+As specified by requirement
+% TODO reference to the correct requirement
+, \acrshort{xacml} is used to evaluate access policies. The \acrshort{pdp}, described by the \acrshort{xacml} specification (\cite{OASISStandard2013EXtensible3.0}), cannot operate on its own. Instead it communicates with other components to enforce the policy on the requester. The mapping of the proposed system components to the \acrshort{xacml} context is illustrated in Figure~\ref{fig:xacml-use}, Appendix~\ref{sec:xacml-use} on page~\pageref{fig:xacml-use}.
+
 Example of a solution that implements \acrshort{pdp} functionality is \href{sec:online-access-control}{Azure AD} or WSO2 Identity Server\footnotemark.
 % 
 \footnotetext{\url{https://web.archive.org/web/20190407180021/https://docs.wso2.com/display/IS570/WSO2+Identity+Server+Documentation}, accessed 07 April 2019.}
@@ -92,4 +84,11 @@ The resource endpoint serves the external clients. This endpoint is the gateway 
 The UserInfo endpoint is a component as defined in~\cite{Sakimura2014Final:1}. It serves claims about user attributes to the external clients. The client must present a valid access token to receive the attributes of the associated user. The UserInfo Endpoint serves as an access point for clients outside the security perimeter, but it does not store any user attributes itself. Instead, it queries the User Directory for any requested attributes every time such request is received.
 
 \bigskip\noindent
-Not all of the mentioned components are necessarily different physical entities, but we list them here separately as they perform a different function are logically independent. In the next section we describe the interactions between these components in more detail.
+Not all of the mentioned components are necessarily different physical entities, but we list them here separately as they perform a different function are logically independent. Figure~\ref{fig:data-flow-diagram} presents the high-level view of these components and their interactions. In the next section we describe the interactions between these components in more detail.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.95\textwidth]{data-flow-diagram}
+    \caption{High-level overview of system components and their interactions. The left side of the figure represents unsecured, public internet. The right side represents the security perimeter of the enterprise, which is not accessible from the public internet.}
+    \label{fig:data-flow-diagram}
+\end{figure}

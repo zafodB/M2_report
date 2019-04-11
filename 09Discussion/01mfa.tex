@@ -1,0 +1,28 @@
+\subsection{Multi-factor considerations} \label{multiFA}
+
+Multi-factor authentication is an approach where two or more factors for successful authentication of a user are required. This way, if one of factors is compromised, there is a need for compromising the other factors as well in order to successfully access the resources. \acrshort{nist} in their Digital Identity Guidelines~\cite{Grassi2017Digital3} specifies three groups of authenticators which can be used for authentication:
+\begin{itemize}[noitemsep]
+    \item Something you know (typically a password, \acrshort{pin}, etc.)
+    \item Something you have (typically a physical cryptographic key, authenticator application, etc.)
+    \item Something you are (typically a fingerprint, retina scan, etc.)
+\end{itemize}
+
+Choosing a right combination of authenticators is crucial for every system as it can either strengthen the security or if badly combined even weaken it. Therefore, now we will analyse each of these three groups of authenticators and suggest the most suitable one.
+
+\paragraph{Something you know}
+Authenticators from this group has been used for centuries, however in the era of technical advance and modern technologies they become obsolete and hard to manage. People are using dozens of services online for which they need to remember some kind of password or \acrshort{pin}. Therefore, they are often choosing easy to remember passwords or are using the same for all services~\cite{2018OnlineSurvey}. On top of that, passwords are prone to phishing attacks and it is possible a user will forget it. Furthermore, one of the aims of the system presented in this project, is to avoid the use of passwords. Using\textit{ ``something you know’’} as another factor would therefore go against our initial goal of not using this element.
+
+\paragraph{Something you have}
+In the enterprise environment, access cards (RFID or proximity cards) are used often, this is just one factor authentication thought. These days, there are many options for authentication using \textit{``something you have’’}, some being more user friendly than the others. It is popular to use a phone to receive a SMS or an email with a \acrfull{otp} to prove identity, but it has been advised by NIST not to use it anymore~\cite{NIST2017NISTBlog}. For the purposes of our system, as mentioned before (in section \ref{sec:analysis-authentication}), we are planning to use a physical cryptographic key to authenticate a user as a primary authentication method, instead of \textit{``something you know’’}. Using two physical cryptographic keys is not advised because of a high chance of losing them both at the same time. On the other hand, using \acrshort{otp} generator such as smartphone application or smart card is feasible, because of its simplicity, easy of use and price. 
+
+\paragraph{Something you are}
+People tend to forget and lose things; therefore, one can argue that using \textit{``something you are’’} is the most user friendly and secure of all above mentioned authenticators. Fingerprint scan is among the most used authenticators. FIDO2 which is implemented in our system has been certified on Android smartphones and biometric scanners can be used to authenticate users. Another option is to integrate fingerprint scanner to a physical cryptographic key. This way, the ownership of the device and identity of the user can be verified at the same time. Also, it fulfils the NIST requirement about using Biometrics in \acrshort{mfa}: \textit{Biometrics SHALL be used only as part of multi-factor authentication with a physical authenticator (something you have).}~\cite{Grassi2017DigitalManagement}. Both of these options are suitable for our enterprise scenario and can be proposed to be used.
+
+\paragraph{Suggested solution}
+Each of the authenticator types has it pros and cons. The most important criteria for choosing another factor in \acrshort{mfa} are the security and easy of use. Based on analysis above, three candidate solutions are found:
+\begin{itemize}[noitemsep]
+    \item \acrshort{otp} generator in form of calculator or smartphone application
+    \item \acrshort{fido}2 physical cryptographic key with fingerprint scanner
+    \item \acrshort{fido}2 certified smartphone with fingerprint scanner
+\end{itemize}
+All three solution are secure~\cite{Grassi2017DigitalManagement}, \cite{FIDOFIDO2Project}, fairly easy to use and can be implemented to our system. Our preference are both options containing FIDO2 as it is being implemented in the system already. However, as \acrshort{mfa} is not part of the requirements neither for \acrshort{mvp} nor for prototype, we will not go further in analyzing which of candidate solutions is the most feasible to implement.
