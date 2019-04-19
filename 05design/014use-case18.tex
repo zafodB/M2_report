@@ -1,0 +1,47 @@
+\begin{table}[htpb!]
+    \footnotesize
+    \onehalfspacing
+    \centering
+    \begin{tabular}{|c|p{13cm}|}
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Name}&
+    UC-18: Access enterprise protected resources
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Description}&
+    External systems might need to read or modify protected resources owned by the enterprise, which are not connected to any single user to fulfil their function.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Primary actors}&
+    \textbullet~External system
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Secondary actors}&
+    None
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
+    \textbullet~A client connection between the external system and the \acrshort{acs} has been established and a client secret has been issued to the external system.\newline
+    \textbullet~The client acting on behalf of the external system is web-server based.\newline
+    \textbullet~The policy permits the access to the protected resources.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Processing}&
+    \textbullet~The \acrshort{acs} verifies the client ID and client secret. \newline
+    \textbullet~The \acrshort{acs} verifies that the policy permits the external system to access enterprise protected resources.\newline
+    \textbullet~If the conditions are met, \acrshort{acs} issues an Access Token to the External client. The client presents this access token, when it is manipulating the protected resources. The access token has a limited validity and cannot be used for other than requested resources, or after it's validity period has elapsed.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Outcome}&
+    \textbullet~The external client obtained an access token and presented it in the request to manipulate the protected resource; or\newline
+    \textbullet~The external client has been denied access to the protected resources.
+    \\
+    \hline
+     \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&
+     \textbf~The access token cannot be used, if it's validity has expired.
+     \\
+     \hline
+    \end{tabular}
+    \caption{Detailed specification of UC-18}
+    \label{tab:usecase-18-specs}
+\end{table}

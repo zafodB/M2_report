@@ -1,14 +1,14 @@
 \subsection{Access control flows}
-% NAME? "System flow example(s)
-
 The access control flow of the proposed system can be broken down into three stages:
 \begin{enumerate*}[label=(\roman*)]
     \item \textit{Authentication},
     \item \textit{Access Policy Evaluation} and
     \item \textit{Access Policy Enforcement}.
 \end{enumerate*}
-% TODO both use cases - specify!
-These stages can be identified in both use case of the system, although the flow in each stage is adapted to the given use case.
+
+All of these three stages can be identified in both use cases UC-1 and UC-2, and UC-17 and UC-18 also have steps for policy evaluation and policy enforcement during their processing.
+
+f the system, although the flow in each stage is adapted to the given use case.
 
 \subsubsection{Authentication}
 In this stage, the user identifies and authenticates themselves to the \acrshort{aaserver}. This is the first stage of the access control flow and is only preceded by the user clicking a login button or approaching a door. The authentication is done via the FIDO2 protocol, but the flows during this stage are different during online login and when opening a door.
@@ -25,17 +25,14 @@ In the last step of the Authentication stage, the \acrshort{aaserver} issues a s
 
 If the \acrshort{aaserver} receives a valid \acrshort{jwt} in the Access request, it does not carry out further authentication steps and proceeds directly to the Access policy evaluation stage. If the received \acrshort{jwt} is expired or otherwise invalid, the regular process described above applies.
 
-Figure~\ref{fig:authentication-flow} illustrates this process in a sequence diagram. User authentication with a physical key is shown, when when logging in online to an external application.
-% TODO mention usecases here??!!
-When authenticating with a smartphone and when using a \acrshort{pacs}, the flow would be slightly different.
+Figure~\ref{fig:authentication-flow} illustrates this process in a sequence diagram. User authentication with a physical key is shown, when when logging in online to an external application, which corresponds to UC-1. When authenticating with a smartphone and when using a \acrshort{pacs}, the flow would be slightly different.
 % Please see Appendix
 % TODO Add reference to full figures in appendix.
 
 \paragraph{Authenticating to a \acrshort{pacs}} 
-% As mentioned in 
-% TODO point to a use case or something like that here
-% the process of authentication and policy evaluation must be speedy.
-The \acrshort{jwt} cannot be used and is ommited from the process. The authentication method selection form and the \acrshort{uid} input form are both omitted. Instead, the physical key is used as the default authentication method and the \acrshort{uid} is extracted directly from the authenticator.
+When passing a physical checkpoint (described in UC-2), the authentication and policy evaluation must be speedy (as specified by RQ-20). The flow in this case must be adjusted, to fulfil this requirement.
+
+The \acrshort{jwt} cannot be used to and is omitted from the process. The authentication method selection form and the \acrshort{uid} input form are both omitted. Instead, the physical key is used as the default authentication method and the \acrshort{uid} is extracted directly from the authenticator.
 
 \begin{sidewaysfigure}[p]
     \centering

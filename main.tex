@@ -9,34 +9,30 @@
 
 \usepackage[sorting=none, style=numeric-comp]{biblatex}
 
-\usepackage{pdfpages}
+% \usepackage{pdfpages} % NEEDED LATER
 \usepackage{float}
 \usepackage{graphicx}
-% \usepackage{tabularx}
 \usepackage{setspace}
-\usepackage{framed}
 \usepackage{listings}
 \usepackage{epigraph}
 \usepackage{rotating}
+% \usepackage{framed}
 % To have two column glossary
 \usepackage[acronym,toc,nogroupskip,nopostdot]{glossaries}
 \usepackage{glossary-mcols}
-% % \usepackage[table]{xcolor}
-%\usepackage[acronym,toc]{glossaries}
-
-% skusam jak tabulku spravit :D
+\usepackage{multicol}
 \usepackage{colortbl}
 \usepackage{makecell}
-% \usepackage{hhline}
-% \usepackage{tabulary}
-% \usepackage{etoolbox}
+
+\usepackage[table]{xcolor}
+\usepackage{tabto}
+\usepackage{textcomp}
 
 \renewcommand{\arraystretch}{1.15}
 
-
 \graphicspath{ {00images/} }
-\DeclareGraphicsExtensions{.png,.PNG,.pdf}
-% \DeclareGraphicsExtensions{.pdf,.png,.PNG} % TODO- CHANGE TO THIS
+% \DeclareGraphicsExtensions{.png,.PNG,.pdf}
+\DeclareGraphicsExtensions{.pdf,.png,.PNG} % TODO - CHANGE TO THIS
 
 \addbibresource{references.bib}
 \setlength{\parindent}{1cm}
@@ -51,7 +47,7 @@
 %%%%%%%%%%%%%%%%%%% 
 
 \begin{document}
-
+\pagenumbering{roman}
 % \includepdf{cover_page}
 % \includepdf{page_zero}
 \tableofcontents
@@ -64,10 +60,12 @@
 \printglossary[type=\acronymtype, title=List of acronyms and abbreviations, toctitle=List of acronyms and abbreviations, nonumberlist]
 \printglossary
 \end{singlespacing}
+\pagebreak
 
+\pagenumbering{arabic}
 \include{01Introduction/00introduction}
 \pagebreak
-\include{02Methodology/00methodology}
+% \include{02Methodology/00methodology}
 \pagebreak
 \include{03sota/000sota}
 \pagebreak
@@ -85,13 +83,13 @@
 
 \pagebreak
 
-% \appendix
+\appendix
 % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
 % \input{99appendix/01links}
-% \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
-% \input{99appendix/02xacml-figures}
-% % \newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,footskip=.4cm}
-% % \input{15Appendixes/02apendixC}
+\newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
+\input{99appendix/02xacml-figures}
+\newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,footskip=.4cm}
+\input{99appendix/03use-case-diagram}
 % % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
 % \input{15Appendixes/03apendixD.tex}
 % \restoregeometry

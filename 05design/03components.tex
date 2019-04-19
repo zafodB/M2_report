@@ -1,6 +1,16 @@
 \subsection{Components}
 To best design the architecture of our system, we must first understand the different actors and their roles. In the FIDO2, OAuth and \acrshort{oidc} specifications there is a degree in ambiguity -- problem being, that while each specification explains details in its own context, the link to other parts of an \acrshort{acs} are not obvious. In this section we identify components of our system and clear this ambiguity by drawing the borders of each specification within the system.
 
+The external system and internal system are represented jointly as \textit{requester}. Requester is a system that is attempting to sign the user in, or access the protected resource. At the core of the proposed system is an \acrfull{aaserver}, which carries out most of the authentication and authorisation tasks. The \acrshort{aaserver} consults with User Directory and \acrfull{pdp}. Figure~\ref{fig:data-flow-diagram} presents the high-level view of these components and their interactions. In the next sections we describe these components in more detail.
+
+% TODO update figure
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.95\textwidth]{data-flow-diagram}
+    \caption{High-level overview of system components and their interactions. The left side of the figure represents unsecured, public internet. The right side represents the security perimeter of the enterprise, which is not accessible from the public internet.}
+    \label{fig:data-flow-diagram}
+\end{figure}
+
 \subsubsection{Requester} 
 Requester is the system or application that is requesting access to protected resources on behalf of the user. Typically, this would be an internal or external client application, but it could also be a \acrshort{pacs}.
 
@@ -69,9 +79,7 @@ The \acrfull{pdp} determines whether a given user or requester us authorised to 
 
 It evaluates the policy based on user/requester attributes, and optionally, additional context information. Some of these attributes are supplied by the \acrshort{aaserver} in the query. If these attributes are not sufficient to evaluate a policy, the \acrshort{pdp} can request additional information from the user directory or the \acrshort{aaserver}.
 
-As specified by requirement
-% TODO reference to the correct requirement
-, \acrshort{xacml} is used to evaluate access policies. The \acrshort{pdp}, described by the \acrshort{xacml} specification (\cite{OASISStandard2013EXtensible3.0}), cannot operate on its own. Instead it communicates with other components to enforce the policy on the requester. The mapping of the proposed system components to the \acrshort{xacml} context is illustrated in Figure~\ref{fig:xacml-use}, Appendix~\ref{sec:xacml-use} on page~\pageref{fig:xacml-use}.
+As specified by RQ-22, \acrshort{xacml} is used to evaluate access policies. The \acrshort{pdp}, described by the \acrshort{xacml} specification (\cite{OASISStandard2013EXtensible3.0}), cannot operate on its own. Instead it communicates with other components to enforce the policy on the requester. The mapping of the proposed system components to the \acrshort{xacml} context is illustrated in Figure~\ref{fig:xacml-use}, Appendix~\ref{sec:xacml-use} on page~\pageref{fig:xacml-use}.
 
 Example of a solution that implements \acrshort{pdp} functionality is \href{sec:online-access-control}{Azure AD} or WSO2 Identity Server\footnotemark.
 % 
@@ -83,12 +91,5 @@ The resource endpoint serves the external clients. This endpoint is the gateway 
 \subsubsection{UserInfo Endpoint}
 The UserInfo endpoint is a component as defined in~\cite{Sakimura2014Final:1}. It serves claims about user attributes to the external clients. The client must present a valid access token to receive the attributes of the associated user. The UserInfo Endpoint serves as an access point for clients outside the security perimeter, but it does not store any user attributes itself. Instead, it queries the User Directory for any requested attributes every time such request is received.
 
-\bigskip\noindent
-Not all of the mentioned components are necessarily different physical entities, but we list them here separately as they perform a different function are logically independent. Figure~\ref{fig:data-flow-diagram} presents the high-level view of these components and their interactions. In the next section we describe the interactions between these components in more detail.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=.95\textwidth]{data-flow-diagram}
-    \caption{High-level overview of system components and their interactions. The left side of the figure represents unsecured, public internet. The right side represents the security perimeter of the enterprise, which is not accessible from the public internet.}
-    \label{fig:data-flow-diagram}
-\end{figure}
+\bigskip \noindent
+Not all of the mentioned components are necessarily different physical entities, but we list them here separately as they perform a different function are logically independent. In the following section, we describe the interactions between these components.

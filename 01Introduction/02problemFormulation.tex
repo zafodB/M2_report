@@ -1,17 +1,16 @@
 \subsection{Problem formulation} \label{problemFormulation}
-The motivation for this project comes from the frustration many employees have, when accessing the premises of an enterprise because of an access card they have to carry around, as well as the need to remember passwords to access corporate account and associated services.
-On the other side, there are enterprises which need to keep up with the latest technologies in order to protect their resources, stopping the use of passwords and using more intuitive access system is one of methods. Furthermore, having only one system endpoint from which all access levels and management can be done is very convenient for them.
+The motivation for this project comes from the existing split of online and physical access control systems. Secondary, the low security of passwords has been demonstrated by several phishing cases and their use is discouraged. Alternative ways of strong authentication have been proposed instead, including physical cryptographic devices. The banking industry, which has been using similar tokens for a period of time already (credit cards), has now witnessed the migration of these tokens to smartphones, mainly for user convenience. Such migration is also technically possible in access control scenarios, although its use has been limited in practice.
 
-Taking into account the challenges and issues mentioned previously, guided us in creation of the scope of the project and definition of the actual problem to be solved. The problem formulation is as follows:
+Taking into account the challenges and issues mentioned previously, we propose an innovative \acrshort{acs} that addresses these issues, by building on top of state-of-the-art technologies in the field. The problem formulation is as follows:
 
 \begin{center}
-    \textit{“How to design Access control system, combining both, the physical on-premise and online access to resources managed in one system?”}
+    \textit{“How to design an Access control system, combining both physical and online access control, that includes strong authentication and enables the use of smartphone in access control?”}
 \end{center}
 
 \paragraph{Sub-questions}
-Keeping on track during the design, development and implementation is often hard but important thing to do. Therefore, defining sub-questions and taking small pieces of the problem one by one, instead of the whole problem is a convenient approach. Problem areas recognized in the project are:
+We define the following sub-problems to help guide us in the analysis and design of the system:
 
-ROUGH DRAFT - QUESTIONS
+% TODO Is this still draft?
 \begin{itemize}[noitemsep]
     \item What solutions are there on the market?
     \item What is the system’s architecture?

@@ -1,0 +1,48 @@
+\begin{table}[htpb!]
+    \footnotesize
+    \onehalfspacing
+    \centering
+    \begin{tabular}{|c|p{13cm}|}
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Name}& 
+    UC-2: Pass through a physical checkpoint
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Description}& 
+    Employee authenticate themselves to \acrlong{pacs} with their enterprise digital identity using a \acrshort{fido} physical key via \acrshort{nfc} or with \acrshort{fido} on their smartphone.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Primary actors}&
+    \textbullet~Employee
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Secondary actors}&
+    \textbullet~\acrlong{pacs}
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
+    \textbullet~Employee has an enterprise digital identity assigned. \newline
+    \textbullet~Employee has previously registered at least one of the following authenticators: \newline
+    \textit{i)} single-factor \acrshort{fido} physical key with acrshort{usb} or \acrshort{nfc}, \newline
+    \textit{ii)} \acrshort{fido} enabled smartphone. \newline
+    \textbullet~Policies have been set up that authorise the employee to pass the given checkpoint.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Processing}&
+    \textbullet~Employee approaches the checkpoint and the \acrshort{pacs} reader device mounted in vicinity. \newline
+    \textbullet~Employee swipes their physical FIDO key at the reader device to identify and authenticate themselves; or\newline
+    \textbullet~Employee indicates at the reader device that they wish to use smartphone to identify and authenticate themselves. They visit a special website (enterprise authentication front end), where they input the checkpoint ID and then authenticate using FIDO on the smartphone. \newline
+    \textbullet~Once the system has verified the authenticity of the authenticator, it checks whether the policy permits the employee to pass the given checkpoint.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Outcome}&
+    \textbullet~The checkpoint allows the employee to pass through, if the authentication was successful and policy permits access; or \newline
+    \textbullet~The access is denied and the employee is informed about the denial.
+    \\
+    \hline
+     \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&\textbullet~Access attempt is logged in the system logs.\\
+     \hline
+    \end{tabular}
+    \caption{Detailed specification of UC-2}
+    \label{tab:useCase_02}
+\end{table}
