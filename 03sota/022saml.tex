@@ -6,7 +6,7 @@ The main premise of \acrshort{saml} is that the \acrfull{idp} and the protected 
 
 The Figure~\ref{fig:saml-architectire} illustrates the separation of these two entities. It also depicts the high-level flow of the authentication process. If the user wants to access the protected resource on the right, they first need to authenticate themselves with the \acrshort{idp}.
 
-Another noteworthy aspect of \acrshort{saml} is the identity federation. This is achieved, when the \acrshort{idp} and the \acrshort{rp} are in different security realms, possibly operated by different organisations. As long as an agreement is established between the two, users can use identity managed by the \acrshort{idp} to access any resources outside the organisation's boundary~\cite{2008SecurityOverview}.
+Another noteworthy aspect of \acrshort{saml} is the identity federation. This is achieved, when the \acrshort{idp} and the \acrshort{rp} are in different security realms, possibly operated by different organisations. As long as an agreement is established between the two, users can use their online identity, managed by the \acrshort{idp}, to access any resources outside the organisation's boundary~\cite{2008SecurityOverview}.
 
  \begin{figure}[ht]
     \centering
@@ -20,7 +20,7 @@ An assertion in \acrshort{saml} contains some security information about the \te
 % TODO chekc point about authentication statements - may not be factually correct
 
 \begin{enumerate*}[label=(\roman*)]
-    \item \textit{Authentication statements} describe means and the timestamp of the authorisation carried out by the asserting party;
+    \item \textit{Authentication statements} describe the means and the timestamp of the authorisation carried out by the asserting party;
     \item \textit{Attribute statements} provide information about the subject; and
     \item \textit{Authorisation decision statement} describes what the subject is permitted to access in the system.
 \end{enumerate*}

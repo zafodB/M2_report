@@ -7,7 +7,7 @@ Building up on our initial idea and problem formulation, we determine two major 
     \item \textit{Online Access Control} (access to computer systems, applications, online sign-in etc.)
 \end{itemize}
 
-While the  typical question in a \acrshort{pacs} would be ``\textit{Is the person allowed to enter beyond this point}?'', and can be controlled by a variety of physical barriers, doors, turn-sites and the like, the online access control is more complex. Enterprises nowadays operate a wide spectrum of software solutions including on-premise applications, legacy systems, cloud-based and \acrshort{saas} applications, internally or externally oriented \acrshort{api}s and databases. All of these require some level of access control. To break down this structure, we first begin by identifying two service classes:
+While the  typical question in a \acrshort{pacs} would be ``\textit{Is the person allowed to enter beyond this point}?'', and can be controlled by a variety of physical barriers, doors, turnstiles and the like, the online access control is more complex. Enterprises nowadays operate a wide spectrum of software solutions including on-premise applications, legacy systems, cloud-based and \acrshort{saas} applications, internally or externally oriented \acrshort{api}s and databases. All of these require some level of access control. To break down this structure, we first begin by identifying two service classes:
 \begin{enumerate*}[label=(\roman*)]
     \item \textit{internal applications}, that sit within the enterprise security realm; and 
     \item \textit{external applications}, that include cloud based software, \acrshort{saas} solutions and partner/vendor applications, and which reside outside the given security realm.
@@ -15,11 +15,12 @@ While the  typical question in a \acrshort{pacs} would be ``\textit{Is the perso
 
 The external applications can be further divided based on their interactions with the internal systems. Applications that are not business critical and/or are not integrated with the business processes may not require access to protected resources at all. Examples of such applications would be a lunch booking system or a company social network. These would be primarily used by the employees, but would not require connectors to business-critical systems and could therefore reside outside the security realm.
 
-Other external applications, however, may require access to business-critical resources for their functions. \acrlong{crm} or payroll system may both be purchased as a \acrshort{saas}, but both require connectors to the protected resources to properly fulfil their functions. We can therefore extend our classification of the external applications accordingly -- applications that
+Other external applications, however, may require access to business-critical resources to function. \acrlong{crm} or payroll system may both be purchased as a \acrshort{saas}, but both require connectors to the protected resources to properly fulfil their functions. We can therefore extend our classification of the external applications accordingly -- applications that
 \begin{enumerate*}[label=(\roman*)]
     \item \textit{require access to protected resources} and
     \item \textit{do not require access to protected resources}.
 \end{enumerate*}
+% TODO MAybe add stuff about user protected resources and Enterprise protected resources.
 
 The access control of \textit{internal applications} will likely differ from access control of \textit{external applications} and similarly, the access control for applications that require access to protected resource will differ from those that do not. We can therefore devise an access control breakdown chart, as shown in Figure~\ref{fig:acs-classification}. 
 
@@ -37,6 +38,10 @@ Multiple sources list Identification, Authentication and Authorisation as the th
 \input{04analysis/02authorisation}
 \input{04analysis/03accessPolicyManagement}
 \input{04analysis/04use-cases}
-\input{04analysis/051functional-reqs-table}
 \input{04analysis/050functionalRequirements}
 \input{04analysis/06non-functionalRequirements}
+\newgeometry{left=1.2cm,right=1.2cm,top=2cm,bottom=2cm,footskip=.8cm}
+\input{04analysis/051functional-reqs-table}
+\restoregeometry
+
+% TODO chapter conclusion

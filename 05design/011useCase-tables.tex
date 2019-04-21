@@ -1,0 +1,204 @@
+\begin{table}[htpb!]
+    \footnotesize
+    \onehalfspacing
+    \centering
+    \begin{tabular}{|c|p{15cm}|}
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Name}&
+    UC-1: Sign-in to a system
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Description}&
+    Employee signs-in to an internal or external client system with their enterprise digital identity using single-factor \acrshort{fido} physical key via \acrshort{usb} or \acrshort{nfc}; or \acrshort{fido} on a smartphone.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Primary actors}& 
+    \textbullet~Employee
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Secondary actors}& 
+    \textbullet~Internal system, or \newline
+    \textbullet~External system
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
+    \textbullet~Employee has an enterprise digital identity assigned. \newline
+    \textbullet~Employee has previously registered at least one of the following authenticators: \newline
+    \textit{i)} single-factor \acrshort{fido} physical key with \acrshort{usb} or \acrshort{nfc}, \newline
+    \textit{ii)} \acrshort{fido} enabled smartphone. \newline
+    \textbullet~Employee is in control of the previously registered authenticator. \newline
+    \textbullet~Employee does not have an active session with the given client on the given device.\newline
+    \textbullet~Policies have been set up that authorise the employee to access the client.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Processing}& 
+    \textbullet~Employee launches the client application (either natively on the platform or in a web-browser). \newline
+    \textopenbullet The client can be either internal system or external system. The sign-in process of the employee is the same in both cases. \newline
+    \textbullet~Employee clicks on \textit{Sign-in}, \textit{Log-in} or similar button, or is redirected to sign-in automatically. A sign-in form appears. \newline
+    \textbullet~Employee enters their \acrlong{uid}. \newline
+    \textbullet~Employee is prompted to select their preferred authentication method: a physical key or a smartphone.
+    \newline
+    \textopenbullet~If a physical key is selected, the employee is prompted to use their key with their device (depending on the make of the key and the device). \newline
+    \textopenbullet~If a smartphone is selected, the employee is prompted to navigate to a predefined website (enterprise-supplied authentication front end) on their smartphone, where they are prompted to authenticate with FIDO. \newline
+    \textbullet~Once the employee has been successfully authenticated, their attributes are checked against the existing policies for the system and the authorisation to access the system is verified.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Outcome}& 
+    \textbullet~Employee signed-in and may begin to use the system, or\newline
+    \textbullet~Employee is denied to access the system because they could not be authenticated or are not authorised to access the given system.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&
+    \textbullet~A session is created between employee's device and the system. Depending on the security settings, the employee might not need to sign in the next time when they use the system.
+    \\
+    \hline
+    \end{tabular}
+    \caption{Detailed specification of UC-1}
+    \label{tab:useCase_01}
+\end{table}
+% 
+\begin{table}[htpb!]
+    \footnotesize
+    \onehalfspacing
+    \centering
+    \begin{tabular}{|c|p{15cm}|}
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Name}& 
+    UC-2: Pass through a physical checkpoint
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Description}& 
+    Employee authenticate themselves to \acrlong{pacs} with their enterprise digital identity, using a \acrshort{fido} physical key via \acrshort{nfc} or with \acrshort{fido} on their smartphone.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Primary actors}&
+    \textbullet~Employee
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Secondary actors}&
+    \textbullet~\acrlong{pacs}
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
+    \textbullet~Employee has an enterprise digital identity assigned. \newline
+    \textbullet~Employee has previously registered at least one of the following authenticators: \newline
+    \textit{i)} single-factor \acrshort{fido} physical key with \acrshort{usb} or \acrshort{nfc}, \newline
+    \textit{ii)} \acrshort{fido} enabled smartphone. \newline
+    \textbullet~Policies have been set up that authorise the employee to pass the given checkpoint.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Processing}&
+    \textbullet~Employee approaches the checkpoint and the \acrshort{pacs} reader device mounted in vicinity. \newline
+    \textbullet~Employee swipes their physical FIDO key at the reader device to identify and authenticate themselves; or\newline
+    \textbullet~Employee indicates at the reader device that they wish to use smartphone to identify and authenticate themselves. They visit a special website (enterprise-supplied authentication front end), where they input the checkpoint ID and then authenticate using FIDO on the smartphone. \newline
+    \textbullet~Once the system has authentoicated the employee, it checks whether the policy permits the employee to pass the given checkpoint.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Outcome}&
+    \textbullet~The checkpoint allows the employee to pass through, if the authentication was successful and policy permits access; or \newline
+    \textbullet~The access is denied and the employee is informed about the denial.
+    \\
+    \hline
+     \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&\textbullet~Access attempt is logged in the system logs.\\
+     \hline
+    \end{tabular}
+    \caption{Detailed specification of UC-2}
+    \label{tab:useCase_02}
+\end{table}
+% 
+\begin{table}[htpb!]
+    \footnotesize
+    \onehalfspacing
+    \centering
+    \begin{tabular}{|c|p{15cm}|}
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Name}&
+    UC-17: Access user's protected resources 
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Description}&
+    External systems might need to read or modify user's protected resources, such as files, emails, calendar entries, or others, to fulfil their function.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Primary actors}&
+    \textbullet~External client
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Secondary actors}&
+    None
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
+    \textbullet~A client connection between the external system and the \acrshort{acs} has been established. \newline
+    \textbullet~The policy permits the system to access user's protected resources.\newline
+    \textbullet~The user has previously signed in to the external system.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Processing}&
+    \textbullet~The \acrshort{acs} verifies that the external system has been registered and has been assigned a client ID.\newline
+    \textbullet~The \acrshort{acs} verifies that the user is signed in or has previously singed in to the external system. This can be demonstrated with a refresh token.\newline
+    \textbullet~The \acrshort{acs} verifies that the policy permits the external system to access user's protected resources.\newline
+    \textbullet~If the previous conditions are met, the \acrshort{acs} issues an access token to the External client. The external client uses this token when querying the system for user's resources. The validity of the token is time bound and can be only used to request resources about the user it has been issued for.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Outcome}&
+    \textbullet~The external system can read or modify user's resources, after it has successfully presented a valid access token; or \newline
+    \textbullet~Access was denied and the external system cannot manipulate user's protected resources.
+    \\
+    \hline
+     \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&
+     \textbullet~The access token cannot be used for other user's resources, or after it's validity has expired.
+     \\
+     \hline
+    \end{tabular}
+    \caption{Detailed specification of UC-17}
+    \label{tab:useCase_10}
+\end{table}
+% 
+\begin{table}[htpb!]
+    \footnotesize
+    \onehalfspacing
+    \centering
+    \begin{tabular}{|c|p{15cm}|}
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Name}&
+    UC-18: Access enterprise protected resources
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Description}&
+    External systems might need to read or modify protected resources owned by the enterprise (and which are not owned by any single user) to fulfil their function.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Primary actors}&
+    \textbullet~External system
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Secondary actors}&
+    None
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
+    \textbullet~A client connection between the external system and the \acrshort{acs} has been established and a client secret has been issued to the external system.\newline
+    \textbullet~The client acting on behalf of the external system is web-server based.\newline
+    \textbullet~The policy permits the access to the protected resources.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Processing}&
+    \textbullet~The \acrshort{acs} verifies the client's client ID and client secret. \newline
+    \textbullet~The \acrshort{acs} verifies that the policy permits the external system to access enterprise protected resources.\newline
+    \textbullet~If the conditions are met, the \acrshort{acs} issues an Access Token to the External system client. The client presents this access token, when it is manipulating the protected resources. The access token has a limited validity and cannot be used for any other than requested resources, or after it's validity period has elapsed.
+    \\
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{Outcome}&
+    \textbullet~The external client obtained an access token and presented it in the request to manipulate the protected resource; or\newline
+    \textbullet~The external client has been denied access to the protected resources.
+    \\
+    \hline
+     \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&
+     \textbf~The access token cannot be used, after it's validity has expired.
+     \\
+     \hline
+    \end{tabular}
+    \caption{Detailed specification of UC-18}
+    \label{tab:usecase-18-specs}
+\end{table}

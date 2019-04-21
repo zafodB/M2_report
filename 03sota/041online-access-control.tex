@@ -1,10 +1,10 @@
 \subsubsection{Online access control -- Microsoft}\label{sec:online-access-control}
 
-For the online access control, we choose Microsoft and its Azure Active Directory (Azure AD)\footnotemark as the benchmark solution, as it is described as ``the leader'' in its field~\cite{Kreizman2018MagicWorldwide}. It offers directory services, user authentication and authorisation of users' application access as the core of its functionality, and is primarily targeted on enterprises and organisations, irrespective of size. Microsoft claims that in 2013 50\% of companies on the Fortune~500 list were already using Azure AD and by 2017, this number has grown to 90\%~\cite{Martin201350Azure}.
+For the online access control, we choose Microsoft and its Azure Active Directory (Azure AD)\footnotemark as the benchmark solution, as it is described as ``the leader in its field''~\cite{Kreizman2018MagicWorldwide}. It offers directory services, user authentication and authorisation of users' application access as the core of its functionality, and is primarily targeted on enterprises and organisations, irrespective of size. Microsoft claims that in 2013 50\% of companies on the Fortune~500 list were already using Azure AD and by 2017, this number has grown to 90\%~\cite{Martin201350Azure}.
 
 \footnotetext{\url{https://azure.microsoft.com/en-us/services/active-directory/}, accessed 25 March 2019}
 
-\paragraph{Authentication} Microsoft Azure AD uses passwords as the primary user authentication method and this setting cannot be changed~\cite{Flores2019AuthenticationMethods}. To provide additional security, \acrlong{mfa} can be enabled. Additional factors that are supported by the solution include:
+\paragraph{Authentication} fAzure AD uses passwords as the primary user authentication method and this setting cannot be changed~\cite{Flores2019AuthenticationMethods}. To provide additional security, \acrlong{mfa} can be enabled. Additional factors that are supported by the solution include:
 \begin{enumerate*}[label=(\roman*)]
     % \item \textit{security questions},
     % \item \textit{email address},
@@ -28,4 +28,4 @@ Azure AD further supports password-based, HTML header-based  and Integrated Wind
 
 \paragraph{Application access policy management} When a new application is integrated with Azure AD, the access to this application needs to be provisioned to users. This can be done on an individual or a group basis (role-based access control). 
 
-Attribute-based access control is also implemented to a certain degree via use of the \textit{conditional access} method. When this method is in use, additional parameters can be evaluated, such as location, whether \acrshort{mfa} has been used, whether the user is using a compliant device and other predefined attributes. Furthermore, the enterprise administrator can further define custom criteria that need to be met (such as authentication with an external provider)~\cite{Vilcinskas2019WhatAccess}.
+Attribute-based access control is also implemented to a limited degree via use of the \textit{conditional access} method. When this method is in use, additional parameters can be evaluated, such as location, whether \acrshort{mfa} has been used, whether the user is using a compliant device and other predefined attributes. Furthermore, the enterprise administrator can further define custom criteria that need to be met (such as authentication with an external provider)~\cite{Vilcinskas2019WhatAccess}.

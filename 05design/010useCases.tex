@@ -1,15 +1,14 @@
 \subsection{Prototype Use Cases} \label{sec:design-prototype-usecases}
-To demonstrate the functionality of the proposed \acrshort{acs} in practice, we select the most common uses of our system: signing in, passing a checkpoint and accessing a protected resource. These are represented by the  following will UC-1, UC-2, and UC-16, which are included in the prototype. 
+To demonstrate the functionality of the proposed \acrshort{acs} in practice, we select the most common uses of our system: signing in, passing a checkpoint and accessing a protected resource. These are represented by UC-1, UC-2, and UC-16 and are discussed further.  
 % TODO rewrite, if we decide to include UC-5 (authenticator registration)
 
-UC-1 and UC-2 include the authentication flow with FIDO, which is not used widely today in the combination of online and \acrshort{pacs}, as discussed in Section~\ref{sec:analysis-authentication}. UC-16 (which is a generalisation of UC-17 and UC-18) completes the sign-in process by providing information about the user and serving the protected resources to the client. These are essentially the use cases that an employee would encounter on a daily basis. The remaining use cases are more administrative and are not necessary to demonstrate the intended system functionality.
+UC-1 and UC-2 include the authentication flow with FIDO, which is not used widely today in the combination of online and \acrshort{pacs}, as discussed in Section~\ref{sec:analysis-authentication}. UC-16 (generalisation of UC-17 and UC-18) complements the sign-in process by providing information about the user and serving the protected resources to the client. These are essentially the use cases that an employee would encounter on a daily basis. The remaining use cases are more administrative and are not necessary to demonstrate the intended system functionality, therefore they are not discussed further.
 
 % Use cases \#3-5 are about adding and revoking authenticators and setting account recovery. These are vital features, but without implementing the backbone of the system, the actual Authentication and Authorisation methods, these could not be implemented. However, the system can still function without them being implemented. Similarly for Use cases \#6-8, which are connected with Access policy management and can be rather hardcoded, instead of creating a \textbf{?UI?} and \textbf{?internal logic?} for them to demonstrate. That applies to Use case \#9 as well.
 
 On the following pages, detailed description of the use cases is provided for UC-1 (Table~\ref{tab:useCase_01}), UC-2 (Table~\ref{tab:useCase_02}), UC-17 (Table~\ref{tab:useCase_10}) and UC-18 (Table~\ref{tab:usecase-18-specs}).
 
 % TODO Move some to appendix, if necessary
-\input{05design/011useCase_01}
-\input{05design/012useCase_02}
-\input{05design/013useCase_10}
-\input{05design/014use-case18}
+\newgeometry{left=1.2cm,right=1.2cm,top=1cm,bottom=1cm,footskip=.4cm}
+\input{05design/011useCase-tables}
+\restoregeometry

@@ -31,8 +31,9 @@
 \renewcommand{\arraystretch}{1.15}
 
 \graphicspath{ {00images/} }
-% \DeclareGraphicsExtensions{.png,.PNG,.pdf}
-\DeclareGraphicsExtensions{.pdf,.png,.PNG} % TODO - CHANGE TO THIS
+\DeclareGraphicsExtensions{.png,.PNG,.pdf}
+% \DeclareGraphicsExtensions{.pdf,.png,.PNG} % TODO - CHANGE TO THIS
+% TODO check figure margins when outputed as PDF
 
 \addbibresource{references.bib}
 \setlength{\parindent}{1cm}
@@ -63,12 +64,12 @@
 \pagebreak
 
 \pagenumbering{arabic}
-\include{01Introduction/00introduction}
-\pagebreak
+% \include{01Introduction/00introduction}
+% \pagebreak
 % \include{02Methodology/00methodology}
-\pagebreak
-\include{03sota/000sota}
-\pagebreak
+% \pagebreak
+% \include{03sota/000sota}
+% \pagebreak
 \include{04analysis/00analysis}
 \pagebreak
 \include{05design/00design}
@@ -92,6 +93,7 @@
 \input{99appendix/03use-case-diagram}
 % % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
 % \input{15Appendixes/03apendixD.tex}
+% \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
 % \restoregeometry
 
 \end{document}

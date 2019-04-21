@@ -1,24 +1,24 @@
-\begin{table}[H]
+\begin{table}[htbp!]
     \footnotesize
     \onehalfspacing
     \centering
-    \begin{tabular}{|c|p{12cm}|c|}
+    \begin{tabular}{|c|p{15cm}|c|}
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{ID}&\cellcolor[HTML]{CBCEFB}\textbf{Description}&\cellcolor[HTML]{CBCEFB}\textbf{Reference}\\
     \hline
-    RQ-1&User must be able to authenticate with single-factor cryptographic device based on FIDO2 to use their enterprise digital identity.&Section~\ref{sec:analysis-authentication}\\
+    RQ-1&User must be able to authenticate with a single-factor cryptographic device based on FIDO2 to use their enterprise digital identity.&Section~\ref{sec:analysis-authentication}\\
     \hline
-    RQ-2&User must be able to authenticate with smartphone using FIDO2 flow to use their enterprise digital identity.&Section~\ref{sec:analysis-authentication}\\
+    RQ-2&User must be able to authenticate with a smartphone, using FIDO2 to use their enterprise digital identity.&Section~\ref{sec:analysis-authentication}\\
     \hline
     \hline
     % TODO Add reference to section, where we discuss it
-    RQ-3&User must be able to sign-in to internal system with their enterprise digital identity.&UC-1\\
+    RQ-3&User must be able to sign-in to an internal system with their enterprise digital identity.&UC-1\\
     \hline
     % TODO Add reference to section, where we discuss it
-    RQ-4&User must be able to sign-in to external client system with their enterprise digital identity.&UC-1\\
+    RQ-4&User must be able to sign-in to an external client system with their enterprise digital identity.&UC-1\\
     \hline
     \hline
-    RQ-5&User must be able to pass a physical checkpoint with their enterprise digital identity.&UC-2\\
+    RQ-5&User must be able to pass through a physical checkpoint with their enterprise digital identity.&UC-2\\
     \hline
     \hline
     RQ-6&User must be able to revoke their authenticator.&UC-4\\
@@ -36,6 +36,7 @@
     \hline
     RQ-11&Administrator must be able to create new enterprise digital identity.&UC-8\\
     \hline
+    \hline
     RQ-12&Administrator must be able to delete enterprise digital identity.&UC-9\\
     \hline
     \hline
@@ -52,11 +53,30 @@
     RQ-17&Administrator must be able to create new connections to external client systems.&UC-15\\
     \hline
     \hline
-    RQ-18&External client system must be able to access protected resources if permission granted.&UC-16\\
+    RQ-18&External client system must be able to access protected resources if a permission was granted.&UC-16\\
     \hline
-    RQ-19&External client system must be able to obtain grant permission.&UC-16\\
+    RQ-19&External client system must be able to obtain a grant permission.&UC-16\\
     \hline
     \end{tabular}
     \caption{List of functional requirements for the proposed system with the reference to their origin.}
     \label{tab:functional-requirements}
+\end{table}
+% 
+\begin{table}[htbp!]
+    \footnotesize
+    \onehalfspacing
+    \centering
+    \begin{tabular}{|c|p{15cm}|c|}
+    \hline
+    \cellcolor[HTML]{CBCEFB}\textbf{ID}&\cellcolor[HTML]{CBCEFB}\textbf{Description}&\cellcolor[HTML]{CBCEFB}\textbf{Reference}\\
+    \hline
+    RQ-20&Authentication to PACS using enterprise digital identity must be comparably fast to traditional RFID access cards (order of milliseconds to seconds).&\makecell{Section \ref{sec:analysis-authentication} \\ and UC-2}\\
+    \hline
+    RQ-21&The system must use OIDC + OAuth for Authentication and Authorisation.&\makecell{Section \ref{sec:analysis-authentication} \\ and \ref{sec:analysis-authorisation}}\\
+    \hline
+    RQ-22&The system must use XACML for access policy management.&Section \ref{sec:analysis-access-policy}\\
+    \hline
+    \end{tabular}
+    \caption{List of non-functional requirements for the \acrshort{mvp} with the reference to where they are collected from.}
+    \label{tab:nonfunctional-requirements}
 \end{table}

@@ -3,15 +3,15 @@ Use cases are a valuable analysis technique for obtaining requirements subsequen
 
 % TODO possible reference here: "Writing effective use cases"
 
-The first step when creating a use case is to identify all actors that are interacting with the system. Our primary actor is the user -- an employee of an enterprise who is using the system to sign-in to a service or get through a physical checkpoint. The employee should also be able to carry out basic administrative tasks on their own account, such as revoke a lost or stolen authenticator, set up additional authenticators, such as smartphones, to increase convenience (provided that the enterprise policy permits the use of such),  and set up account recovery methods, such as security questions, or one-time passwords.
+The first step when creating a use case is to identify all actors that are interacting with the system. Our primary actor is the user -- an employee of an enterprise who is using the system to sign-in to a service or get through a physical checkpoint. The employee should also be able to carry out basic administrative tasks on their own account, such as revoke a lost or stolen authenticator, set up additional authenticators (e.g. a smartphone), if that the enterprise policy permits the use of such, and set up account recovery methods, such as security questions, or one-time passwords.
 % TODO Add reference to previous discussion (should be within Analysis or SOTA).
 
-Another actor in our system is the administrator. The administrator manages employees and their enterprise digital identities within the \acrshort{acs}, as well as the attributes and policies for accessing resources. Furthermore, the administrator sets-up and manages connections with external business systems (external clients). The right side of the diagram shows the receiving actors: these are the internal systems and external systems, which the employees require access to, and which may need to manipulate employee's protected resources during their operation. Additionally, the external systems may also require access to enterprise protected resources (protected resources, which are not bound to a single user), as discussed previously\footnotemark.
+Another actor in our system is the administrator. The administrator manages employees and their enterprise digital identities within the \acrshort{acs}, as well as the attributes and policies for accessing resources. Furthermore, the administrator sets-up and manages connections with external business systems (external clients). On the other side of the system are the receiving actors: these are the internal and external systems, which the employees require access to, and which may need to manipulate employee's protected resources during their operation. Additionally, the external systems may also require access to enterprise protected resources (protected resources, which are not bound to a single user), as discussed previously\footnotemark.
 % TODO Add reference to previous discussion (should be within Analysis).
 % 
 \footnotetext{Internal systems might also require access to protected resources for their operation. However, it is assumed that internal systems can access the protected resource directly, without intervention from the \acrshort{acs}.}
 
-Having the knowledge of the actors interacting with the system and their primary actions, we can identify the following set of use cases (list in figure~\ref{fig:use-cases-list}). 
+Having the knowledge of the actors interacting with the system and their primary actions, we can identify the following set of use cases (list in Figure~\ref{fig:use-cases-list}). 
 
 \begin{figure}[H]
     \centering
@@ -22,7 +22,7 @@ Having the knowledge of the actors interacting with the system and their primary
         \item[UC-3] Manage account security
         \item[UC-4] Revoke an authenticator
         \item[UC-5] Register additional authenticator
-        \item[UC-6] Set-up an account recovery method
+        \item[UC-6] Set-up~an~account~recovery method
         \item[UC-7] Manage users
         \item[UC-8] Add user
         \item[UC-9] Remove user
@@ -41,6 +41,6 @@ Having the knowledge of the actors interacting with the system and their primary
     \label{fig:use-cases-list}
 \end{figure}
 
-In total eighteen use cases are identified as shown above. Figure~\ref{fig:use-case-diagram} in Appendix~\ref{sec:use-case-diagram} on page~\pageref{fig:use-case-diagram} illustrates the composition of these use cases and the relationships between actors and the use cases. The proposed system should cater to all of these use cases, as they are all necessary for the system to be deployable in an enterprise scenario. More functionality could be added to the system, introducing further use cases and richer interactions. However, this functionality is beyond the \acrlong{mvp} and is not listed here.
+In total eighteen use cases are identified as shown above. Figure~\ref{fig:use-case-diagram} in Appendix~\ref{sec:use-case-diagram} on page~\pageref{fig:use-case-diagram} illustrates the composition of these use cases and the relationships between actors and the use cases. The proposed system should cater to all of these use cases, as they are all necessary for the system to be deployable in an enterprise scenario. More functionality could be added to the system, introducing further use cases and richer interactions. However, this functionality is beyond the \acrshort{mvp} and is not listed here.
 
 % First two use cases come from the basis of this project, which tries to solve the access of employees to protected resources both online and on premise (\acrshort{uc}-1, 2). Once having an authenticator, it is vital to have a way to revoke it, in case it has been stolen or compromised (\acrshort{uc}-3). Adding additional authenticator is crucial for implementation of the system in highly secure facilities, where authentication with only one factor may not be enough (\acrshort{uc}-4). Following, if all authenticators are compromised, there should be a way of recovering the enterprise digital identity, therefore, adding a recovery method is essential (\acrshort{uc}-5). In order to keep the system updated and maintained, there should be a way of managing everything, that is the role of administrator who needs to be able to manage employees (\acrshort{uc}-6), manage their attributed so they can access various resources (\acrshort{uc}-7), manage the policies which determine who can access resources (\acrshort{uc}-8) and manage connections with external clients (\acrshort{uc}-9). Lastly, protected resources needs to be made available for systems, both internal and external, so they can function properly (\acrshort{uc}-10).

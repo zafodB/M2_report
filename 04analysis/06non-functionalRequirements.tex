@@ -1,21 +1,2 @@
 \subsubsection{Non-functional requirements} \label{sec:analysis-nonfunctional}
-Non-functional requirements describe how the system is and how does it perform. They can be evaluated based on measures. User usually cannot directly see their implementation, but can rather feel it by the performance. Often they influence the architecture of the system. Table~\ref{tab:nonfunctional-requirements} lists these requirements for the proposed system. The \textit{Reference} column indicates the origin of the given requirement to map, why that requirement has been included.
-
-\begin{table}[ht]
-    \footnotesize
-    \onehalfspacing
-    \centering
-    \begin{tabular}{|c|p{12cm}|c|}
-    \hline
-    \cellcolor[HTML]{CBCEFB}\textbf{ID}&\cellcolor[HTML]{CBCEFB}\textbf{Description}&\cellcolor[HTML]{CBCEFB}\textbf{Reference}\\
-    \hline
-    RQ-20&\makecell{Authentication to PACS using enterprise digital identity must be comparably\\ fast to traditional RFID access cards (order of milliseconds to seconds).}&\makecell{Section \ref{sec:analysis-authentication} \\ and UC-2}\\
-    \hline
-    RQ-21&The system must use OIDC + OAuth for Authentication and Authorisation.&\makecell{Section \ref{sec:analysis-authentication} \\ and \ref{sec:analysis-authorisation}}\\
-    \hline
-    RQ-22&The system must use XACML for Identity and Access management.&Section \ref{sec:analysis-access-policy}\\
-    \hline
-    \end{tabular}
-    \caption{List of non-functional requirements for the \acrshort{mvp} with the reference of where they are collected from.}
-    \label{tab:nonfunctional-requirements}
-\end{table}
+Non-functional requirements describe how the system is and how does it perform. They can be evaluated based on measures. User usually cannot directly see their implementation, but can rather feel it by the system performance. Often they influence the architecture of the system. Table~\ref{tab:nonfunctional-requirements} lists these requirements for the proposed system. The \textit{Reference} column indicates the origin of the given requirement to map, why that requirement has been included.
