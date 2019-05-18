@@ -22,14 +22,14 @@ In the last step of the Authentication stage, the \acrshort{aaserver} issues a s
 
 If the \acrshort{aaserver} receives a valid \acrshort{jwt} in the Access request, it does not carry out further authentication steps and proceeds directly to the Access Policy Evaluation stage. If the received \acrshort{jwt} is expired or otherwise invalid, the regular process described above applies.
 
-Figure~\ref{fig:authentication-flow} illustrates this process in a sequence diagram. User authentication with a physical key is shown, when when logging in online to an external application, which corresponds to UC-1. When authenticating with a smartphone and when using a \acrshort{pacs}, the flow would be slightly different.
+Figure~\ref{fig:authentication-flow} illustrates this process in a sequence diagram. User authentication with a physical key is shown, when logging in online to an external application, which corresponds to UC-1. When authenticating with a smartphone and when using a \acrshort{pacs}, the flow would be slightly different.
 % Please see Appendix
 % TODO Add reference to full figures in appendix.
 
 \paragraph{Authenticating to a \acrshort{pacs}} 
 When passing a physical checkpoint (described in UC-2), the authentication and policy evaluation must be speedy (as specified by RQ-20). The flow in this case must be adjusted, to fulfil this requirement.
 
-The \acrshort{jwt} cannot be used to and is omitted from the process. The authentication method selection form and the \acrshort{uid} input form are both omitted. Instead, the physical key is used as the default authentication method and the \acrshort{uid} is extracted directly from the authenticator. The signed challenge together with the \acrshort{uid} is forwarded to the User Directory, which looks up the \acrshort{uid}, verifies the challenge and informs the \acrshort{aaserver} about the outcome.
+The \acrshort{jwt} cannot be used and is omitted from the process. The authentication method selection form and the \acrshort{uid} input form are both omitted. Instead, the physical key is used as the default authentication method and the \acrshort{uid} is extracted directly from the authenticator. The signed challenge together with the \acrshort{uid} is forwarded to the User Directory, which looks up the \acrshort{uid}, verifies the challenge and informs the \acrshort{aaserver} about the outcome.
 
 \newgeometry{left=1.2cm,right=1.2cm,top=1cm,bottom=1cm,footskip=.4cm}
 \begin{sidewaysfigure}[p]

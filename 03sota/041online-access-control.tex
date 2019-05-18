@@ -4,7 +4,7 @@ For the online access control, we choose Microsoft and its Azure Active Director
 
 \footnotetext{\url{https://azure.microsoft.com/en-us/services/active-directory/}, accessed 25 March 2019}
 
-\paragraph{Authentication} fAzure AD uses passwords as the primary user authentication method and this setting cannot be changed~\cite{Flores2019AuthenticationMethods}. To provide additional security, \acrlong{mfa} can be enabled. Additional factors that are supported by the solution include:
+\paragraph{Authentication} Azure AD uses passwords as the primary user authentication method and this setting cannot be changed~\cite{Flores2019AuthenticationMethods}. To provide additional security, \acrlong{mfa} can be enabled. Additional factors that are supported by the solution include:
 \begin{enumerate*}[label=(\roman*)]
     % \item \textit{security questions},
     % \item \textit{email address},
@@ -22,7 +22,7 @@ Either the enterprise administrator or the user themselves can decide, which of 
 
 \paragraph{Single Sign-on} Azure AD supports both \acrshort{saml} and OAuth + OpenID Connect for single sign-on to non-Microsoft applications. Developers are encouraged to only use OAuth + OpenID Connect for new applications, but \acrshort{saml} can still be used with legacy and other software that does not support OAuth + OpenID~\cite{barbkess2019SingleDirectory}. 
 
-All four types of authorisation grants defined in OAuth specification can be used. The ID token which is issued during the OpenID connect flow, contains the standard claims defined in the specification. Two endpoints are defined to handle OAuth + OpenID Connect protocols -- v1.0 and v2.0. Together, the two endpoints support variety of languages (.NEt, JavaScript, Python, Java and other) and target applications (on-premise, cloud-based, hybrid)~\cite{deGuzman2018AboutPlatform}.
+All four types of authorisation grants (explained in Section \ref{sec:OAuth_2}) defined in OAuth specification can be used. The ID token which is issued during the OpenID connect flow, contains the standard claims defined in the specification. Two endpoints are defined to handle OAuth + OpenID Connect protocols -- v1.0 and v2.0. Together, the two endpoints support variety of languages (.NEt, JavaScript, Python, Java and other) and target applications (on-premise, cloud-based, hybrid)~\cite{deGuzman2018AboutPlatform}.
 
 Azure AD further supports password-based, HTML header-based  and Integrated Windows Authentication \acrlong{sso}~\cite{barbkess2019SingleDirectory}. These are out of scope for this report.
 

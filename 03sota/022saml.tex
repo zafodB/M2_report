@@ -2,7 +2,7 @@
 
 The \acrfull{saml} is a framework for exchange of assertions containing security information between two online parties, typically an identity provider and a relying party. Similarly as XACML, \acrshort{saml} was developed by OASIS. Version 1.0 was released in 2002 and version 2.0 (latest) in 2005. The rest of this report refers to version 2.0.
 
-The main premise of \acrshort{saml} is that the \acrfull{idp} and the protected resource/application are two separated entities. This is desired, since it enables us to manage identities centrally for multiple applications and avoids duplication user accounts across these applications. Moreover, separating these enables both parts to specialise only in their task.
+The main premise of \acrshort{saml} is that the \acrfull{idp} and the protected resource/application are two separated entities. This is desired, since it enables us to manage identities centrally for multiple applications and avoids duplication of user accounts across these applications. Moreover, separating these enables both parts to specialise only in their task.
 
 The Figure~\ref{fig:saml-architectire} illustrates the separation of these two entities. It also depicts the high-level flow of the authentication process. If the user wants to access the protected resource on the right, they first need to authenticate themselves with the \acrshort{idp}.
 
@@ -22,7 +22,7 @@ An assertion in \acrshort{saml} contains some security information about the \te
 \begin{enumerate*}[label=(\roman*)]
     \item \textit{Authentication statements} describe the means and the timestamp of the authorisation carried out by the asserting party;
     \item \textit{Attribute statements} provide information about the subject; and
-    \item \textit{Authorisation decision statement} describes what the subject is permitted to access in the system.
+    \item \textit{Authorisation decision statements} describes what the subject is permitted to access in the system.
 \end{enumerate*}
 
 % \paragraph{Protocols}
@@ -34,7 +34,7 @@ An assertion in \acrshort{saml} contains some security information about the \te
 \begin{itemize}[noitemsep]
     \item \textit{HTTP Redirect Binding}, where the entire \acrshort{saml} message is carried in the URL parameters, in the header of an HTTP GET method. This is suitable for short messages as the length of URL is limited in practice. This binding can be used in a RESTful system.
     \item \textit{HTTP POST Binding}, where the \acrshort{saml} message is base64 encoded into an XHTML form and transmitted using the HTTP POST method. This binding can also be used in a RESTful system.
-    \item \textit{SAML SOAP Binding} specifies how the \acrshort{saml} messages are carried in an XML envelope over SOAP over any underlying transport protocol~\cite{Cantor2005BindingsV2.0}.
+    \item \textit{SAML SOAP Binding}, specifies how the \acrshort{saml} messages are carried in an XML envelope over SOAP over any underlying transport protocol~\cite{Cantor2005BindingsV2.0}.
 \end{itemize}
 
 % \paragraph{Profiles}

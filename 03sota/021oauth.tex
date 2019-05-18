@@ -19,13 +19,13 @@ Using the OAuth framework, a third-party application may obtain a fine-grained a
     \item \textit{Authorisation Code Grant}. Using this grant type, the user is first directed from the web-based application to authenticate with the authorisation server. After user authenticates, they are asked by the authorisation server to give consent for the client application to use their protected resources. Once the consent is given, the user agent receives an authorisation code from the authentication server. This authorisation code is passed to the web server via a \acrshort{http} redirect method. The client running on the web server contacts the authorisation server with the authorisation code to obtain an access token. The access token is presented when the client application accesses the protected resource. This flow is illustrated in Figure~\ref{fig:oauth-code-grant}.
     \item \textit{Implicit Grant}. In this grant type, the client application is typically running in the user agent. The flow is similar to the one described above, but instead of the authorisation code, the access token is sent directly to the client application. This is simpler than the authorisation code grant, but less secure, since the access token can be captured by other applications residing on the user's device.
     \item \textit{Resource Owner Password Credentials Grant}. When using this grant type, user's credentials need to be shared directly with the client application. This is only suitable, if the client application is fully trusted by the user.
-    \item \textit{Client Credentials Grant} is used when the client application requires access to own resources (as opposed to user's protected resources).
+    \item \textit{Client Credentials Grant}. Is used when the client application requires access to own resources (as opposed to user's protected resources).
 \end{itemize}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.95\textwidth]{oauth-code-grant}
-    \caption{OAuth Authorisation code grant. The user authenticates with the authorisation server and gives consent for access to their protected resources. An authorisation code is sent to the redirect URI specified in the original request. This access token is forwarded to the web server hosing the client application and exchanged for an access token at the authorisation server. From~\cite{Hardt2012TheFramework}, edited.}
+    \caption{OAuth Authorisation code grant. The user authenticates with the authorisation server and gives consent for access to their protected resources. An authorisation code is sent to the redirect URI specified in the original request. This access token is forwarded to the web server hosting the client application and exchanged for an access token at the authorisation server. From~\cite{Hardt2012TheFramework}, edited.}
     \label{fig:oauth-code-grant}
 \end{figure}
 
