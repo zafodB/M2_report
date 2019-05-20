@@ -1,0 +1,61 @@
+\subsection{OAuth \& OIDC and etc. NEW HEADING NEEDED} \label{sec:implementation-oauth}
+% TODO heading ¯\_(ツ)_/¯
+
+This section describes the implementation of OAuth and \acrshort{oidc} in our prototype. This part of the prototype implements two use cases: the \textit{UC-1 -- Sign-in}, where the basic user information are obtained using \acrshort{oidc}, and the \textit{UC-16 -- Access protected resources}, where the authorisation of the user is carried out and access to resources is granted or denied.
+
+\subsubsection{Setup}
+Various approaches to implementation of these use cases could have been adopted. Since we use \acrfull{gcp} to host the \acrshort{aaserver} in the Authentication flow, we also decided to use Google Cloud Compute Engine to carry out the rest of the Access Policy Enforcement flow. Therefore, initially, the \acrlong{gcp} was chosen for this scenario as well.
+
+Google Cloud Community\footnote{\url{https://cloud.google.com/community}, accessed 19 May 2019} offers a compact guide for implementing OAuth2 on the \acrshort{gcp}, which we used to get understanding on how to implement it there~\cite{Awyu2018UnderstandingCloud}. Based on the guide we created a project on \acrshort{gcp} with client and user entities in the Datastore and Token, Auth, and Sign-in functions as described. Despite closely following the steps outlined in the guide, the solution did not achieve the desired results even after several modifications. The exact reason was not determined, but system logs indicated that recent changes to the \acrshort{gcp} Datastore\footnote{\url{https://cloud.google.com/datastore/release-notes\#august_22_2018}, accessed 20 May 2019}, broke the functionality described in the guide.
+% , everything has been implemented as instructed, the server did not work and we did not manage to get over the error experienced, despite trying to implement our own solution based on the example. 
+Therefore, we decided to move further and try different set-up and platform.
+
+Looking for another approach to implementation of OAuth and \acrshort{oidc}, we found that Spring framework\footnote{\url{https://spring.io/}, accessed 19 May 2019} (together with Spring Boot\footnote{\url{https://spring.io/projects/spring-boot}, accessed 19 May 2019} and Spring OAuth\footnote{\url{https://spring.io/projects/spring-security-oauth}, accessed 19 May 2019}) could be used for this flow. Spring framework is an open source \acrshort{ioc} container and application framework which is written in Java for the Java platform. Spring Boot is used for development of spring applications without the need of deploying WAR files. It configures the application automatically based on dependencies as well as libraries if possible. Spring OAuth is a part of the Spring Security project, which enables easy implementation of OAuth2 using Spring models.
+
+Several guides on the subject were followed, but many introduced errors because of incompatibility of newer versions of libraries they used. A guide by Federico Yankelevich~\cite{Yankelevich2016OAuth2Enterprises} was found to be suitable for our problem and was free of the incompatibility errors. The author defines: \textit{authorisation server}, \textit{resource server} and \textit{web application} in the guide. We implemented and configured this part of the prototype according to this guide and refer to it in the following sections.
+% 
+% Further in this section, we will explain the workings of this example and its flows. The code used and submitted with the report is the one from the example (available at~\cite{Yankelevich2016OAuth2Enterprises}), having minor changes made to it. 
+
+In the application, three different clients are defined: account-admin, account-read, account-write, where each of them is having different access level to the resource, the \textit{message} which can be read or updated. Account-admin can both read and update the message, account-read can only read and account-write can only update the message. The application uses The Client Credential grant flow, which is used when the client application requires access to own resources and to obtain the access token.
+
+\subsubsection{Flow}
+To start the authorisation and resource servers, separate terminals have to be used and to deploy both servers locally on \texttt{localhost:8080} and \texttt{localhost:9090} respectively. Once started, there are two options for the client to access the resource:
+% 
+\begin{enumerate*}[label=(\roman*)]
+    \item open another terminal and use \acrshort{curl} commands to communicate with servers, 
+    \item starting the web application in another terminal and in the web browser access \texttt{localhost:9999} where the interface is available for reading and updating the message.
+\end{enumerate*}
+
+When accessing the resources using the first method, \acrshort{curl} command specifying the credentials of client, target resource and grant type is used, such as \texttt{curl account-admin:password -admin@localhost:8080/auth/oauth/token -d grant\_type=client\_credentials}. This way the \textit{access token} is obtained from the \textit{authorisation server} which first verifies client's credentials, then accesses the target resource and issues the \textit{access token}, which can be used for the message resource access, both read and update based on client's access level. The \textit{access token}'s validity is set to 90 seconds, during which the token can be used to manipulate the message resource while only contacting the \textit{resource server} to do so. Once the validity of the \textit{access token} has expired, the \textit{authorisation server} is contacted again to obtain fresh \textit{access token} which can then be used.
+
+If second method is used, the same happens in the background, but instead of using commands in the terminal, user interface with text boxes and buttons is available to interact with in the web application. Also, the communication is ongoing between the web application and the \textit{resource server} instead of a terminal window and the \textit{resource server} as in previous method.
+
+\bigskip \noindent
+In the above explained implementation of UC-1 and UC-16, the \acrshort{oidc} is not implemented, while OAuth is implemented but not with an Authorisation grant flow as intended. Also, it is not the user who is signing-in to the service, its rather the client who is being verified and is accessing the resource. This way, we can see that the \acrshort{oidc} and OAuth part of the intended prototype has not been fully and successfully implemented, alternatively, Client Credentials Grant flow has been implemented to show how access token is obtained and used for resource access.
+
+% Goal
+% What was a goal to implement
+% Implement UC-1 and UC-16 (generalisation of 17 and 18)
+
+% Set-up
+% different approaches, tutorials and libraries used
+% give examples with links
+% what were the struggles
+
+% showcase the one chosen
+% what are the entities being implemented
+%     - authorisation server
+%     - resource server
+%     - web-app
+
+% what is being used for implementation
+%     - spring boot
+%     - run in command/powershell
+
+% what it does
+%     - user credential flow
+%     - give the client access token to access resources + scopes
+%     - also refreshes the access token every 60s
+%     - can read & write in web-app
+%     - change scopes/privileges
+%     - run as three local servers in terminals

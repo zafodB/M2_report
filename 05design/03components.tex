@@ -8,7 +8,7 @@ Figure~\ref{fig:data-flow-diagram} presents the high-level view of these compone
 % TODO update figure
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.95\textwidth]{data-flow-diagram}
+    \includegraphics[width=.85\textwidth]{data-flow-diagram}
     \caption{High-level overview of system components and their interactions. The left side of the figure represents unsecured, public internet. The right side represents the security perimeter of the enterprise, which is not accessible from the public internet.}
     \label{fig:data-flow-diagram}
     % TODO check figure margins when outputed as PDF
@@ -32,7 +32,7 @@ User agent does not act on its own, but instead hosts web-based and user-agent-b
 
 Examples of user agents are Chrome, Mozilla, Microsoft Edge.
 
-\subsubsection{\acrlong{aaserver}} 
+\subsubsection{Authentication and Authorisation Server} 
 The \acrfull{aaserver} is the core of the proposed access control system. As the name suggests, it handles the authentication and authorisation of the users. It communicates with the User Agent, the Requester, the User Directory and the \acrshort{pdp}.
     
 \paragraph{User access request}
@@ -77,7 +77,7 @@ Examples of a user directory would be Active Directory\footnote{Active Directory
 % 
 \footnotetext{\url{https://web.archive.org/web/20190407171447/https://directory.apache.org/}, accessed 07 April 2019.}
     
-\subsubsection{\acrlong{pdp}}
+\subsubsection{Policy Decision Point}
 The \acrfull{pdp} determines whether a given user or Requester is authorised to access a protected resource. The \acrshort{pdp} stores the policies and when queried by the \acrshort{aaserver}, it evaluates the relevant policy and issues an evaluation decision.
 
 It evaluates the policy based on user/Requester attributes, and optionally, additional context information. Some of these attributes are supplied by the \acrshort{aaserver} in the query. If these attributes are not sufficient to evaluate a policy, the \acrshort{pdp} can request additional information from the User Directory or the \acrshort{aaserver}.

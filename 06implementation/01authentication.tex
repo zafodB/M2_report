@@ -1,0 +1,63 @@
+\subsection{Authentication}\label{sec:implementation-authentication}
+In this section we describe, how the authentication flows are implemented in the prototype. Following the findings from the Analysis and Design chapters, we proceed to implement the sign-in use case, where the user uses their authenticator to sign-in to a service (UC-1), and the registration use case, where a new authenticator is added to user's account (UC-5). The sign-in use case in the prototype omits the use of \acrshort{jwt} for authentication, and only considers the use of a \acrshort{fido} key.
+
+\subsubsection{Setup}
+Essentially, the prototype demonstrates the communication between a user agent and the \acrshort{aaserver}. A regular internet browser could be used as the user agent, but a custom \acrshort{aaserver} must be implemented to carry out the sign-in and registration activities. While it would be possible to demonstrate this by running a server locally on developer's machine, we have chosen to deploy the \acrshort{aaserver} into the cloud to allow for testing across different platforms. Google Cloud Compute Engine\footnote{\url{https://cloud.google.com/compute/}, accessed 19 May 2019} was arbitrarily chosen to host the \acrshort{aaserver}, due to offering a range of free services, making it suitable for testing. A virtual machine running Debian 9 distribution of Linux as the operating system was created in the cloud, and Apache Tomcat 9\footnote{\url{http://tomcat.apache.org/}, accessed 19 May 2019} was installed as the primary host of web server code. The combination of Linux and Tomcat was chosen to support serving of dynamic web content via Java Servlet technology. Java was chosen as the server-side language, due to its wide-spread use and existing FIDO libraries and examples.
+
+The server was configured to accept connections from any IP address over the port \texttt{433} on the \texttt{/AAFidoServer} endpoint. A self-signed certificate was deployed at the server and the server was configured to enforce the use of \texttt{HTTPS} for any requests to the endpoint. This was due to the fact, that any manipulation with user credentials (such as FIDO key) in the user agent must be made via \textit{secure context}\footnote{\url{https://www.w3.org/TR/secure-contexts/}, accessed 19 May 2019}, which mandates the use of encryption when serving a web page.
+
+A domain name \texttt{fidoserver.ml} was registered on a cost-free top-level domain\footnote{\url{https://www.freenom.com/en/index.html?lang=en}, accessed 19 May 2019} and the responsible \acrshort{dns} server was configured to direct requests to the public IP address of the server. This was required by the browser in addition to \texttt{HTTPS} to establish the secure context~\cite{Hodges2012HTTPHSTS}.
+
+A MongoDB database was also deployed on the server to retain user data. The choice of the database was also arbitrary, motivated mainly by ease of use and existing Java integration libraries.
+
+\subsubsection{Libraries used}
+Java Servlets are part of Java Enterprise Edition (EE) and provide an interface to easily receive and respond to HTTP requests made to the server. Developer environments designed for Java EE also offer other tools for creating web applications. These were used to create two user-facing pages (one for registration and one for sign-in) and two JavaScript files orchestrating the process in the browser. These were all bound together in a web application (web archive file \texttt{.war}) and deployed on the Apache Tomcat server.
+
+Yubico java-webauthn-server library\footnote{\url{https://github.com/Yubico/java-webauthn-server}, accessed 19 May 2019} 1.2.0 was used at the server side to build and verify Webauthn assertions and attestations. An example Webauthn implementation from Google\footnote{\url{https://github.com/google/webauthndemo}, accessed 19 May 2019} was also used as a model for user-agent scripts, although customisation was needed to adapt the user-agent scripts to assertions built by the Yubico's Webauthn server library.
+
+MongoDB Synchronous Driver\footnote{\url{https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync/3.9.0}, accessed 19 May 2019} in version 3.9.0 was used to communicate with the local database. This library contains serialisation and deserialisation features to map Java classes to database objects and vice versa.
+
+\subsubsection{Structure}
+The architecture of the authentication part of the prototype loosely follows the \acrlong{movp} architectural pattern. This pattern separates the application into three layers, separating the responsibility of each layer.
+
+The model is responsible for manipulating, updating and maintaining the data in the system~\cite{MRizwan2014APresenter}. In this part of the prototype, the model is represented by four \texttt{store} classes, which describe the structure of the data and four \texttt{connector} classes that manipulate this data.
+
+The presenter captures user input and feeds the data to the model. The presenter also adjusts the view accordingly, based on an event triggered by the user, or when a change is requested by the model~\cite{MRizwan2014APresenter}. Here, the presenter is represented by the JavaScript files that execute in the user agent, four classes, which extend the \texttt{HttpServlet} of Java Servlet library, and which execute on the server and a small number of utility classes of the Webauthn server library that help process and unwrap user input.
+
+Finally, the view is responsible for presenting the user interface and displaying data to the user. The view in this part of the prototype is represented by two Java Server Pages files, which exclusively contain the HTML representation of the user facing part of the prototype.
+
+Class diagram in Figure~\ref{fig:class-diagram} captures the classes of this part of the prototype. These classes, together with the configuration file describing the URL endpoints and their mapping to the \texttt{HttpServlet} classes make up the web application, which is packaged and deployed on the web server.
+
+\newgeometry{left=1cm,right=1cm,top=1cm,bottom=.8cm,footskip=.3cm}
+\begin{sidewaysfigure}[p]
+    \centering
+    \includegraphics[width=\textwidth]{class-diagram}
+    \caption{Class diagram for the authentication part of the prototype. The red colour represents the view pattern, the green colour represents the presenter and the blue colour represents the model.}
+    \label{fig:class-diagram}
+\end{sidewaysfigure}
+\restoregeometry
+    
+\subsubsection{Flows}
+The authenticator registration process corresponds to UC-5. The overview of the flow is as follows:
+% 
+\begin{enumerate}[noitemsep]
+    \item A user-agent visits the specified endpoint of the \acrshort{aaserver}: \texttt{/AAFidoServer/register} and is served a static HTML page (class \texttt{register}) and a corresponding JavaScript file (class \texttt{registerPage}), which captures user's input.
+    \item Once the user fills in the data and pushes the Register button, a \linebreak\texttt{/AAFidoServer/begin-registration} endpoint is contacted. In this endpoint a \linebreak\texttt{RegistrationRequest}, carrying the challenge and relevant relying party data is created, saved into database and sent in JSON format to the user agent.
+    \item The user agent unwraps the JSON format and uses the included parameters to call \linebreak\texttt{navigator.credentials.create()} method, which is implemented by the browser and which prompts the user to use their authenticator. Figure~\ref{fig:key-prompts} shows the prompts displayed after the methods is called.
+    \item If the user activates an authenticator, the browser returns an \linebreak\texttt{AuthenticatorAttestationResponse} object, containing initial information passed in the request, plaintext information about the newly created key pair such as credential ID and the public key, and the contents of the attestation response object signed over with the authenticator private key. The attestation response is passed by the JavaScript code to the \texttt{/AAFidoServer/finish-registration} endpoint on the \acrshort{aaserver}.
+    \item The attestation response is processed and and compared with the \texttt{RegistrationRequest}, which is retrieved from the database. If the received response matches the original request, a user record is created in the database with user's `personal' details (unique name and display name) and relevant credential details, and the user is notified on the registration page.
+\end{enumerate}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=.75\textwidth]{key-prompt}
+    \caption{Propts to use an authenticator as displayed by the Chrome (left) and Firefox (right) browsers.}
+    \label{fig:key-prompts}
+\end{figure}
+
+The sign-in process in this part of the prototype corresponds to step 4
+% TODO check if it is step 4
+of UC-1 (see Table~\ref{tab:useCase_01} on page~\pageref{tab:useCase_01}). The detailed flow of the sign-in procedure is similar to the registration procedure described above. The server endpoints are replaced with the corresponding sign-in endpoints, \texttt{RegistrationRequest} is replaced with an \texttt{AssertionRequest} and the \texttt{AuthenticatorAttestationResponse} is replaced with an \texttt{AuthenticatorAssertionResponse}. When the \texttt{AssertionRequest} is created, a list of credentials associated with user's account is retrieved and included in the request. This list is presented to the authenticator during the \texttt{navigator.credentials.get()} method call. If the authenticator recognises a credential ID it previously created from the list, it produces an \texttt{AuthenticatorAssertionResponse} and the flow continues similarly to the registration flow.
+
+\subsubsection{Testing}
+Static testing was used to verify the correctness of the prototype flows. Code review was the main testing method, aided by automated code analysis. The testing verified the viability of the flow and identified several places, where more rigorous error handling was required. Debugging was also performed on small parts of the code, however the debugger could not be attached to the server and thus the debugging could not be used for the entire web application.

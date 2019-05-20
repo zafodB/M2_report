@@ -17,27 +17,11 @@ Another noteworthy aspect of \acrshort{saml} is the identity federation. This is
 
 \paragraph{Assertions}
 An assertion in \acrshort{saml} contains some security information about the \textit{subject}. Subject could be the user Bob and the associated information could be Bob's email address and job title. The security information need to be of one of following three categories:
-% TODO chekc point about authentication statements - may not be factually correct
 
 \begin{enumerate*}[label=(\roman*)]
-    \item \textit{Authentication statements} describe the means and the timestamp of the authorisation carried out by the asserting party;
+    \item \textit{Authentication statements} describe the means and the timestamp of the authentication carried out by the asserting party;
     \item \textit{Attribute statements} provide information about the subject; and
     \item \textit{Authorisation decision statements} describes what the subject is permitted to access in the system.
 \end{enumerate*}
 
-% \paragraph{Protocols}
-% \acrshort{saml} defines a number of general protocols to facilitate the message exchange during different parts of the assertion process.
-
-\paragraph{Bindings}
-\acrshort{saml} describes how the messages exchanged during an assertion process can be bound to lower-level transport protocols. There are in total 6 bindings defined by the standard, but the following three are of particular interest:
-
-\begin{itemize}[noitemsep]
-    \item \textit{HTTP Redirect Binding}, where the entire \acrshort{saml} message is carried in the URL parameters, in the header of an HTTP GET method. This is suitable for short messages as the length of URL is limited in practice. This binding can be used in a RESTful system.
-    \item \textit{HTTP POST Binding}, where the \acrshort{saml} message is base64 encoded into an XHTML form and transmitted using the HTTP POST method. This binding can also be used in a RESTful system.
-    \item \textit{SAML SOAP Binding}, specifies how the \acrshort{saml} messages are carried in an XML envelope over SOAP over any underlying transport protocol~\cite{Cantor2005BindingsV2.0}.
-\end{itemize}
-
-% \paragraph{Profiles}
-% Several profiles which build on assertions and bindings are defined in the standard which correspond to the most common use cases of \acrshort{saml}. 
-
-While \acrshort{saml} is widely adopted in the industry and is considered generally secure, numerous security flaws have been identified over time. Most of these arised from improper implementation of the protocol and have been patched since discovery~\cite{Krawczyk2014SecureAttacks}. The vulnerabilities included XML signature wrapping, assertion eavesdropping~\cite{Chen2014Environment-BoundAssertions} and XML parsing issues~\cite{Degges2018AVulnerability}.
+While \acrshort{saml} is widely adopted in the industry and is considered generally secure, numerous security flaws have been identified over time. Most of these arose from improper implementation of the protocol and have been patched since discovery~\cite{Krawczyk2014SecureAttacks}. The vulnerabilities included XML signature wrapping, assertion eavesdropping~\cite{Chen2014Environment-BoundAssertions} and XML parsing issues~\cite{Degges2018AVulnerability}.

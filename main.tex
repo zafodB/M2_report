@@ -13,7 +13,7 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{setspace}
-\usepackage{listings}
+% \usepackage{listings}
 \usepackage{epigraph}
 \usepackage{rotating}
 % \usepackage{framed}
@@ -58,45 +58,46 @@
 % To have two column glossary
 \setglossarystyle{mcolindex}
 % \setglossarystyle{long}
+\pagebreak
 \printglossary[type=\acronymtype, title=List of acronyms and abbreviations, toctitle=List of acronyms and abbreviations, nonumberlist]
 \printglossary
 \end{singlespacing}
 \pagebreak
 
 \pagenumbering{arabic}
-% \include{01Introduction/00introduction}
-% \pagebreak
+\include{01Introduction/00introduction}
+\pagebreak
 \include{02Methodology/00methodology}
 \pagebreak
-% \include{03sota/000sota}
-% \pagebreak
-% \include{04analysis/00analysis}
-% \pagebreak
-% \include{05design/00design}
-% \pagebreak
-% \include{06implementation/00implementation}
-% \pagebreak
-% \include{09Discussion/00discussion}
-% \pagebreak
-% \include{10conclusion/00conclusion}
-% \pagebreak
+\include{03sota/000sota}
+\pagebreak
+\include{04analysis/00analysis}
+\pagebreak
+\include{05design/00design}
+\pagebreak
+\include{06implementation/00implementation}
+\pagebreak
+\include{09Discussion/00discussion}
+\pagebreak
+\include{10conclusion/00conclusion}
+\pagebreak
 
 \printbibliography[heading=bibintoc]
 
-% \epigraph{Smart contracts are neither smart, nor contracts!}{\textit{www.stateofthedapps.com/about}}
+\epigraph{Passwords are dead.}{Everyone, since 2004. \textit{\href{http://fidoserver.ml:8080/about.jsp}{fidoserver.ml:8080/about.jsp}}}
 
 \pagebreak
 
-% \appendix
+\appendix
+\newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
+\input{99appendix/01links}
+\newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
+\input{99appendix/02xacml-figures}
+\newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,footskip=.4cm}
+\input{99appendix/03use-case-diagram}
 % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
-% \input{99appendix/01links}
-% \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
-% \input{99appendix/02xacml-figures}
-% \newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,footskip=.4cm}
-% \input{99appendix/03use-case-diagram}
-% % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
 % \input{15Appendixes/03apendixD.tex}
 % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
-% \restoregeometry
+\restoregeometry
 
 \end{document}

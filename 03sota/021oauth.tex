@@ -1,4 +1,4 @@
-\subsubsection{OAuth 2.0} \label{sec:OAuth_2}
+\subsubsection{OAuth} \label{sec:OAuth_2}
 
 Before existence of OAuth, the access to user's protected resources was commonly delegated to a third party by sharing the user's credentials with that third party. It typically meant, that a client application asked the user for their user-name and password and these were then used to log in to a given service on behalf of the user. This approach was named the `password anti-pattern' and is flawed~\cite{Paul2010OAuthAnti-pattern}. Besides the risk of compromising user's account if the credentials leak from the client application, it is also not possible for the user to fine-tune the access to their account and set up different levels of access for different client applications. 
 
@@ -25,11 +25,11 @@ Using the OAuth framework, a third-party application may obtain a fine-grained a
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.95\textwidth]{oauth-code-grant}
-    \caption{OAuth Authorisation code grant. The user authenticates with the authorisation server and gives consent for access to their protected resources. An authorisation code is sent to the redirect URI specified in the original request. This access token is forwarded to the web server hosting the client application and exchanged for an access token at the authorisation server. From~\cite{Hardt2012TheFramework}, edited.}
+    \caption{OAuth Authorisation code grant. The user authenticates with the authorisation server and gives consent for access to their protected resources. An authorisation code is sent to the redirect URI specified in the original request. This authorisation code is forwarded to the web server hosting the client application and exchanged for an access token at the authorisation server. From~\cite{Hardt2012TheFramework}, edited.}
     \label{fig:oauth-code-grant}
 \end{figure}
 
 \paragraph{Access token scopes}
 Scope in the OAuth context typically represents a piece of functionality or data, access to which can be individually controlled. Well defined scopes allow for granular access control. The client application includes the \textit{scope} parameter in the authorisation request to inform the authorisation server, which data or functionality it wishes to access. The authorisation server may grant access to any number of the requested scopes, based on the internal policy and user's consent~\cite{Hardt2012TheFramework}.
 
-The process outlined above is mostly concerned with authorisation of the client to access protected resources. However, it emerged as a common, albeit incorrect practice that OAuth was used to authenticate users~\cite{RicherUser2.0}, by allowing the client to only read a scope that contains the basic user data. While it is technically possible to achieve this using OAuth alone, \acrshort{oidc} was developed to standardise this usecase. We cover \acrshort{oidc} these in Section~\ref{sec:oidc}.
+The process outlined above is mostly concerned with authorisation of the client to access protected resources. However, it emerged as a common, albeit incorrect practice that OAuth was used to authenticate users~\cite{RicherUser2.0}, by allowing the client to only read a scope that contains the basic user data. While it is technically possible to achieve this using OAuth alone, \acrshort{oidc} was developed to standardise this use case. We cover \acrshort{oidc} these in Section~\ref{sec:oidc}.

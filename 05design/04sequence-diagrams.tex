@@ -32,7 +32,7 @@ When passing a physical checkpoint (described in UC-2), the authentication and p
 The \acrshort{jwt} cannot be used and is omitted from the process. The authentication method selection form and the \acrshort{uid} input form are both omitted. Instead, the physical key is used as the default authentication method and the \acrshort{uid} is extracted directly from the authenticator. The signed challenge together with the \acrshort{uid} is forwarded to the User Directory, which looks up the \acrshort{uid}, verifies the challenge and informs the \acrshort{aaserver} about the outcome.
 
 \newgeometry{left=1.2cm,right=1.2cm,top=1cm,bottom=1cm,footskip=.4cm}
-\begin{sidewaysfigure}[p]
+\begin{sidewaysfigure}[tpb]
     \centering
     \includegraphics[width=\textwidth]{authentication-flow}
     \caption{Authentication flow during online access control with a server-based client, using a physical authenticator. If the authentication is not successful, the \acrshort{aaserver} informs the client and the user about the unsuccessful authentication and does not continue to the Access policy evaluation stage.}
@@ -75,6 +75,11 @@ If the policy denies user access to the application, the \acrshort{aaserver} inf
 
 Figure~\ref{fig:accessing-resource-ext} illustrates this flow in a sequence diagram. The flow is different, if the client application is native or user-agent-based.
 
+\paragraph{Internal client application and \acrshort{pacs}}
+If the requester is an internal application or a \acrshort{pacs}, a token is not necessary to access protected resources. In this case, the \acrshort{aaserver} simply informs the requester about the policy decision and this decision is then enforced directly by the application/\acrshort{pacs}.
+
+% TODO IMPORTANT - Add all the unused sequence diagrams to the appendixes
+
 \newgeometry{left=1.2cm,right=1.2cm,top=1cm,bottom=1cm,footskip=.4cm}
 \begin{sidewaysfigure}[p]
     \centering
@@ -85,7 +90,3 @@ Figure~\ref{fig:accessing-resource-ext} illustrates this flow in a sequence diag
 \end{sidewaysfigure}
 \restoregeometry
 
-\paragraph{Internal client application and \acrshort{pacs}}
-If the requester is an internal application or a \acrshort{pacs}, a token is not necessary to access protected resources. In this case, the \acrshort{aaserver} simply informs the requester about the policy decision and this decision is then enforced directly by the application/\acrshort{pacs}.
-
-% TODO IMPORTANT - Add all the unused sequence diagrams to the appendixes

@@ -1,4 +1,4 @@
-\subsection{Basic terms}
+\subsection{Basic terms}\label{sec:basic-terms}
 
 \paragraph{Policy}
 The IT portfolio of many current enterprises consists of a variety of different applications and systems. As a fine grained control of users' access to these resources is required, management of access rights for every user can become tedious. A set of rules is usually in place, which specify how a \textit{subject} (a person, user, actor) can interact with an \textit{object} (system, program), describing subject's accountability and capabilities within the object~\cite{Feltus2008PreliminaryConcept}. Policies are often used in the \hyperref[sec:xacml]{XACML} context.
@@ -8,8 +8,13 @@ An assertion is a ``confident and forceful statement of fact or belief''\footnot
 
 \footnotetext{\url{https://en.oxforddictionaries.com/definition/assertion}, accessed 05 March 2019}
 
-% TODO maybe expand glossary by some more terms to avoid ambiguity? Let's see later on.
-% Maybe include: 
-    % resource
-    % PACS
-    % Checkpoint?
+\paragraph{Single Sign-on}
+Single sign-on systems are such systems where the user only needs to authenticate once to be logged in to different services from different providers~\cite{Suoranta2014LogoutSolutions}. In practice, big common providers, such as Google or Facebook are used to sign the user in, and the user's profile with the provider is then used to access the content or services hosted by a third party.
+
+\paragraph{Multi-factor authentication}
+Multi-factor authentication is an approach where two or more factors for successful authentication of a user are required. This way, if one of factors is compromised, there is a need for compromising the other factors as well in order to successfully access the resources. \acrshort{nist} in their Digital Identity Guidelines~\cite{Grassi2017Digital3} specifies three groups of authenticators which can be used for authentication:
+\begin{itemize}[noitemsep]
+    \item Something you know (typically a password, \acrshort{pin}, etc.)
+    \item Something you have (typically a physical cryptographic key, authenticator application, etc.)
+    \item Something you are (typically a fingerprint, retina scan, etc.)
+\end{itemize}
