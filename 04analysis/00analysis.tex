@@ -20,11 +20,12 @@ Other external applications, however, may require access to business-critical re
     \item \textit{require access to protected resources} and
     \item \textit{do not require access to protected resources}.
 \end{enumerate*}
-% TODO MAybe add stuff about user protected resources and Enterprise protected resources.
+% 
+We can further distinguish between enterprise protected resources and user protected resources. The former are resources that reside in the enterprise realm, but are not directly connected to, or created by any single user. Example of enterprise protected resources could be a list of orders, directory of vendors or internal training materials. User protected resources are such resources that are owned or created by an individual user. Examples of these are files, emails or personal calendar entries.
 
 The access control of \textit{internal applications} will likely differ from access control of \textit{external applications} and similarly, the access control for applications that require access to protected resource will differ from those that do not. We can therefore devise an access control breakdown chart, as shown in Figure~\ref{fig:acs-classification}. 
 
-Multiple sources list Identification, Authentication and Authorisation as the three basic steps in access control~\cite{Harris2008CISSPGuide, 2018AccessSystems, 2003IdentificationAuthorization}. We focus on authentication and authorisation in the system design and describe these further in the following sections.
+Multiple sources list Identification, Authentication and Authorisation as the three basic steps in access control~\cite{Harris2008CISSPGuide, 2018AccessSystems, 2003IdentificationAuthorization}. We focus on authentication and authorisation in the system design and describe these further in the following sections. Subsequently, the evaluation of the access policy models considers the strengths and weaknesses of both \acrshort{rbac} and \acrshort{abac} and suggests the suitable model. Use cases are an important tool to outline possible scenarios of actors' interaction with a system, and subsequently for derivation of requirements, which serve as the base for system design and implementation. Both use cases and requirements are scoped for the system as \acrshort{mvp}.
 
 \begin{figure}[ht]
     \centering

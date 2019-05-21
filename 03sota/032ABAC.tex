@@ -2,13 +2,11 @@
 
 \acrfull{abac} is an automated access control model by NIST. In its core it is based on automatic execution of granting and denying the access depending on attributes and policies.~\cite{NISTAttributeControl} \acrshort{abac} can be also referred to as Policy (\acrshort{pbac}) or Claims (\acrshort{cbac}) Based Access Control\footnote{\url{https://www.hpl.hp.com/techreports/2009/HPL-2009-30.pdf}, accessed 01 April 2019}. XACML standard is based on \acrshort{abac} and is explained in Section \ref{sec:xacml}. It is often denoted as the evolution of \acrshort{rbac}.
 
-In \acrshort{abac}, access is assigned based on attributes and characteristics of the user – subject which is making the request, environment conditions and information asset – resource object that is requested. With the help of these attributes, granular policies for granting and denying access can then be established. Every policy combines a set of attributes and is executed by the Boolean logic, e.g. \texttt{IF} the requester is an accountant, \texttt{THEN} allow read access to contracts.
+In \acrshort{abac}, access is assigned based on attributes and characteristics of the user (subject which is making the request), environment conditions, and information asset (resource object that is requested). With the help of these attributes, granular policies for granting and denying access can then be established. Every policy combines a set of attributes and is executed by the Boolean logic, e.g. \texttt{IF} the requester is an accountant, \texttt{THEN} allow read access to contracts.
 
-% TODO explanation
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.7\textwidth]{ABAC}
-    \caption{Explanation XYZ! + 
-    Taken from~\cite{AttributeABAC}.}
+    \caption{For \acrshort{abac}'s authorisation engine to properly evaluate if user has the access to given resources, it needs subject requesting a resource (user), object being requested (asset), environmental conditions and attributes. Taken from~\cite{AttributeABAC}.}
     \label{fig:ABAC_diagram_sota}
 \end{figure}

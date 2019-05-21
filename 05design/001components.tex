@@ -1,17 +1,15 @@
-\subsection{Components}
+\subsection{Components}\label{sec:design-components}
 To best design the architecture of the system, we must first understand the different actors and their roles. In the FIDO2, OAuth and \acrshort{oidc} specifications there is a degree of ambiguity -- problem being, that while each specification explains details in its own context, the link to other parts of an \acrshort{acs} are not obvious. In this section we identify components of our system and clear this ambiguity by drawing the borders of each specification within our system.
 
 The external and internal systems are represented jointly as a \textit{Requester}. Requester is a system that is attempting to sign the user in, or access the protected resource. At the core of the proposed system is an \textit{\acrfull{aaserver}}, which carries out most of the authentication and authorisation tasks. The \acrshort{aaserver} consults with the User Directory and the  \acrfull{pdp}. To aid external systems retrieve information about users, the UserInfo endpoint translates the requests from the external systems to User Directory queries. Similarly, the Resource Endpoint provides access to the internal protected resources for the external systems. Both the UserInfo Endpoint and the Resource Endpoint are accessible from the public internet and lie on the boundary of the online security perimeter.
 
 Figure~\ref{fig:data-flow-diagram} presents the high-level view of these components and their interactions. In the next sections we describe these components in more detail.
 
-% TODO update figure
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.85\textwidth]{data-flow-diagram}
     \caption{High-level overview of system components and their interactions. The left side of the figure represents unsecured, public internet. The right side represents the security perimeter of the enterprise, which is not accessible from the public internet.}
     \label{fig:data-flow-diagram}
-    % TODO check figure margins when outputed as PDF
 \end{figure}
 
 \subsubsection{Requester} 
@@ -66,7 +64,6 @@ The Authentication Front End could be a native application, running directly on 
 \footnotetext{For example Chrome on Android supports the use of WebAuthn and CTAP2~\cite{ChromePlatformStatus2018SupportAPI}.}
 
 \subsubsection{User Directory}
-% TODO check consistent use accross report
 The User Directory is a directory service that stores user attributes and can be accessed by the internal systems. In the proposed \acrshort{acs}, the User Directory is used to supply attributes about users for authentication and policy evaluation purposes. It also serves attributes to the UserInfo endpoint, when queried.
 
 In addition to standard user attributes (such as name, email, office phone, job title etc.), the user directory stores details about user's authenticators -- the \texttt{credentialPublicKey}(as defined by~\cite{Balfanz2019Web1} -- authenticator's public key). This entry is created when the authenticator is first registered (UC-5) and is used to verify whether the credential challenge for a particular user was signed by an authenticator belonging to this user. Further authenticator details stored in the directory could be the signature counter or a user-defined authenticator name.

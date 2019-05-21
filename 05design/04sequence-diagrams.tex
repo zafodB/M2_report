@@ -19,6 +19,8 @@ If the user selected smartphone as their authentication method, then the challen
 Once the User Directory receives the signed challenge, it verifies whether the signature was made with the private key belonging to the public key stored for the given \acrshort{uid}. It then informs the \acrshort{aaserver} whether the verification was successful or not.
 
 In the last step of the Authentication stage, the \acrshort{aaserver} issues a signed and encrypted \acrshort{jwt} to the user agent/Authentication Front End. The purpose of this is to avoid repeated authentication prompts to the user in a short time span (a couple of hours). Once the user authenticates using an authenticator on certain user agent, they are not prompted to authenticate on the same user agent again, until the validity of the \acrshort{jwt} has expired.
+ 
+Cookies could also be used for token-based authentication to the \acrshort{aaserver}. While there is not yet consensus on which technology should be used~\cite{Beltran2016CharacterizationProtocols, RajuRaghuwanshi2017JWTCookies}, \acrlong{jwt}s offer better support on mobile devices and are not vulnerable to Cross-site request forgery attacks.\footnote{\url{http://web.archive.org/web/20190521213404/https://campus.barracuda.com/product/webapplicationfirewall/doc/42049419/cookie-replay-attack/}, accessed 21 May 2019}
 
 If the \acrshort{aaserver} receives a valid \acrshort{jwt} in the Access request, it does not carry out further authentication steps and proceeds directly to the Access Policy Evaluation stage. If the received \acrshort{jwt} is expired or otherwise invalid, the regular process described above applies.
 

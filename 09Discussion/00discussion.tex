@@ -1,23 +1,16 @@
 \section{Discussion}\label{sec:discussion}
-In this chapter we discuss the complications we faced during the implementation phase of the prototype along with some considerations about it. Possible ways of performing Multi-factor authentication are examined and a few options are suggested. Following, consideration about the future of FIDO and its implementation are expressed. Lastly, potential future works on the system are discussed.
+In this chapter we discuss the progress and the outcomes of the prototype implementation. We then consider several open problems that were not covered in this project, but are relevant for launch of a combined access control system on the market. Possible ways of performing multi-factor authentication are examined, followed by considerations about the future development of FIDO and its implementations. Lastly, potential future works that could extend and built on top of the system are discussed.
 
-% TODO work on Discussion
-\subsection*{Implemenation}
+\subsection*{Implementation}
 In Chapter~\ref{sec:design} we identify a number of use cases and requirements that should be implemented in the prototype to demonstrate the functionality of the system. During the implementation work it was confirmed that there is ongoing work on the different parts of the access control problem in the general coding community. This was demonstrated by the existence of numerous active repositories, libraries and guides for FIDO, OAuth and OIDC.
 
 Despite existence of these, we were not able to implement all of the use cases set out for the prototype. A possible reason for this is the recentness of the involved technologies, mainly FIDO/Webauthn. While the specifications exists and are adopted by major browsers, there is still some degree of ambiguity among existing implementations in the ``gray'' areas not covered by the specification, such as how to store the data in a database, how to parse data to prepare them for transport, or what encoding version (\texttt{Base64} vs \texttt{Base64Url}) should be predominantly used.
 
 In the OAuth/OIDC space, a lot of focus is put into integrating new applications with existing OAuth providers (implementing sign-in with Facebook, Google and similar). In commercial applications, it is not desired to implement own sign-in system and convergence towards the major providers can be seen. However, as demonstrated in the prototype, it is still possible to deploy a customised OAuth/OIDC Authorisation Server.
 
-Even though the prototype does not implement all of the selected use cases, we find it valuable as it does demonstrate some of the fundamental flows of authentication and access policy enforcement. Further work on implementation would gradually resolve the existing issues and present a working solution. To arrive at a marketable \acrshort{mvp}, integration with Active Direcory and/or \acrshort{ldap} would need to be implemented in addition to the other \acrshort{mvp} requirements specified in Section~\ref{sec:analysis-requirements}.
-
-% A number of challenges exist that will be faced in the project. The most fundamental challenge is to understand how \acrshort{acs} works, to identify its main components and to learn about the current systems. Once the knowledge is acquired, the selection of right technologies is an important aspect, as there exist many technologies and standards which can be implemented in the proposed system and therefore, finding the most suitable one is of a big importance. This goes hand in hand with designing a system’s architecture from the scratch and figuring out how the chosen components and technologies can be interconnected to perform desired tasks, while keeping in mind the security and easiness of use.
-
-% TODO Discuss full blown solution (how we would do it if we had a lot of time)
+Even though the prototype does not implement all of the selected use cases, we find it valuable as it does demonstrate some of the fundamental flows of authentication and access policy enforcement. Further work on implementation would gradually resolve the existing issues and present a working solution. To arrive at a marketable \acrshort{mvp}, integration with Active Directory and/or \acrshort{ldap} would need to be implemented in addition to the other \acrshort{mvp} requirements specified in Section~\ref{sec:analysis-requirements}.
 
 \input{09Discussion/01mfa}
-
 \input{09Discussion/02fido}
-
-\input{09Discussion/03future}
-% TODO discuss possible future works coming out of this project
+\input{09Discussion/03endpoint}
+\input{09Discussion/04future}
