@@ -1,7 +1,8 @@
 \section{Discussion}\label{sec:discussion}
-
+In this chapter we discuss the complications we faced during the implementation phase of the prototype along with some considerations about it. Possible ways of performing Multi-factor authentication are examined and a few options are suggested. Following, consideration about the future of FIDO and its implementation are expressed. Lastly, potential future works on the system are discussed.
 
 % TODO work on Discussion
+\subsection*{Implemenation}
 In Chapter~\ref{sec:design} we identify a number of use cases and requirements that should be implemented in the prototype to demonstrate the functionality of the system. During the implementation work it was confirmed that there is ongoing work on the different parts of the access control problem in the general coding community. This was demonstrated by the existence of numerous active repositories, libraries and guides for FIDO, OAuth and OIDC.
 
 Despite existence of these, we were not able to implement all of the use cases set out for the prototype. A possible reason for this is the recentness of the involved technologies, mainly FIDO/Webauthn. While the specifications exists and are adopted by major browsers, there is still some degree of ambiguity among existing implementations in the ``gray'' areas not covered by the specification, such as how to store the data in a database, how to parse data to prepare them for transport, or what encoding version (\texttt{Base64} vs \texttt{Base64Url}) should be predominantly used.

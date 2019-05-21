@@ -22,30 +22,37 @@
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
-    \textbullet~Employee has an enterprise digital identity assigned. \newline
-    \textbullet~Employee has previously registered at least one of the following authenticators: \newline
-    \textit{i)} single-factor \acrshort{fido} physical key with \acrshort{usb} or \acrshort{nfc}, \newline
-    \textit{ii)} \acrshort{fido} enabled smartphone. \newline
-    \textbullet~Employee is in control of the previously registered authenticator. \newline
-    \textbullet~Employee does not have an active session with the given client on the given device.\newline
-    \textbullet~Policies have been set up that authorise the employee to access the client.
+    \vspace{-\topsep}
+    \begin{itemize}[nolistsep, noitemsep, leftmargin=*]
+        \item Employee has an enterprise digital identity assigned.
+        \item Employee has previously registered at least one of the following authenticators:
+        \begin{enumerate*}[label=(\roman*)]
+            \item single-factor \acrshort{fido} physical key with \acrshort{usb} or \acrshort{nfc},
+            \item \acrshort{fido} enabled smartphone.
+        \end{enumerate*}
+        \item Employee is in control of the previously registered authenticator.
+        \item Employee does not have an active session with the given client on the given device.
+        \item Policies have been set up that authorise the employee to access the client.\vspace*{-\baselineskip}
+    \end{itemize}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Processing}& 
-    \textbullet~Employee launches the client application (either natively on the platform or in a web-browser). \newline
-    \textopenbullet The client can be either internal system or external system. The sign-in process of the employee is the same in both cases. \newline
-    \textbullet~Employee clicks on \textit{Sign-in}, \textit{Log-in} or similar button, or is redirected to sign-in automatically. A sign-in form appears. \newline
-    \textbullet~Employee enters their \acrlong{uid}. \newline
-    \textbullet~Employee is prompted to select their preferred authentication method: a physical key or a smartphone.
-    \newline
-    \textopenbullet~If a physical key is selected, the employee is prompted to use their key with their device (depending on the make of the key and the device). \newline
-    \textopenbullet~If a smartphone is selected, the employee is prompted to navigate to a predefined website (enterprise-supplied authentication front end) on their smartphone, where they are prompted to authenticate with FIDO. \newline
-    \textbullet~Once the employee has been successfully authenticated, their attributes are checked against the existing policies for the system and the authorisation to access the system is verified.
+    \vspace{-\topsep}
+    \begin{enumerate}[nolistsep, noitemsep, leftmargin=*]
+        \item Employee launches the client application (either natively on the platform or in a web-browser). The client can be either internal system or external system. The sign-in process of the employee is the same in both cases. 
+        \item Employee clicks on \textit{Sign-in}, \textit{Log-in} or similar button, or is redirected to sign-in automatically. A sign-in form appears.
+        \item Employee enters their \acrlong{uid}.
+        \item Employee is prompted to select their preferred authentication method: a physical key or a smartphone. If a physical key is selected, the employee is prompted to use their key with their device (depending on the make of the key and the device). If a smartphone is selected, the employee is prompted to navigate to a predefined website (enterprise-supplied authentication front end) on their smartphone, where they are prompted to authenticate with FIDO.
+        \item Once the employee has been successfully authenticated, their attributes are checked against the existing policies for the system and the authorisation to access the system is verified.\vspace*{-\baselineskip}
+    \end{enumerate}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Outcome}& 
-    \textbullet~Employee signed-in and may begin to use the system, or\newline
-    \textbullet~Employee is denied to access the system because they could not be authenticated or are not authorised to access the given system.
+    \vspace{-\topsep}
+    \begin{itemize}[nolistsep, noitemsep, leftmargin=*]
+    \item Employee signed-in and may begin to use the system, or
+    \item Employee is denied to access the system because they could not be authenticated or are not authorised to access the given system.\vspace*{-\baselineskip}
+    \end{itemize}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&
@@ -56,6 +63,10 @@
     \caption{Detailed specification of UC-1}
     \label{tab:useCase_01}
 \end{table}
+% 
+% 
+% 
+% 
 % 
 \begin{table}[htpb!]
     \footnotesize
@@ -80,23 +91,34 @@
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
-    \textbullet~Employee has an enterprise digital identity assigned. \newline
-    \textbullet~Employee has previously registered at least one of the following authenticators: \newline
-    \textit{i)} single-factor \acrshort{fido} physical key with \acrshort{usb} or \acrshort{nfc}, \newline
-    \textit{ii)} \acrshort{fido} enabled smartphone. \newline
-    \textbullet~Policies have been set up that authorise the employee to pass the given checkpoint.
+    \vspace{-\topsep}
+    \begin{itemize}[nolistsep, noitemsep, leftmargin=*]
+        \item Employee has an enterprise digital identity assigned.
+        \item Employee has previously registered at least one of the following authenticators:
+         \begin{enumerate*}[label=(\roman*)]
+            \item single-factor \acrshort{fido} physical key with \acrshort{usb} or \acrshort{nfc},
+            \item \acrshort{fido} enabled smartphone.
+         \end{enumerate*}
+         \item Policies have been set up that authorise the employee to pass the given checkpoint.\vspace*{-\baselineskip}
+     \end{itemize}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Processing}&
-    \textbullet~Employee approaches the checkpoint and the \acrshort{pacs} reader device mounted in vicinity. \newline
-    \textbullet~Employee swipes their physical FIDO key at the reader device to identify and authenticate themselves; or\newline
-    \textbullet~Employee indicates at the reader device that they wish to use smartphone to identify and authenticate themselves. They visit a special website (enterprise-supplied authentication front end), where they input the checkpoint ID and then authenticate using FIDO on the smartphone. \newline
-    \textbullet~Once the system has authenticated the employee, it checks whether the policy permits the employee to pass the given checkpoint.
+    \vspace{-\topsep}
+    \begin{enumerate}[nolistsep, noitemsep, leftmargin=*]
+        \item Employee approaches the checkpoint and the \acrshort{pacs} reader device mounted in vicinity.
+        \item Employee swipes their physical FIDO key at the reader device to identify and authenticate themselves; or
+        \item Employee indicates at the reader device that they wish to use smartphone to identify and authenticate themselves. They visit a special website (enterprise-supplied authentication front end), where they input the checkpoint ID and then authenticate using FIDO on the smartphone. 
+        \item Once the system has authenticated the employee, it checks whether the policy permits the employee to pass the given checkpoint.\vspace*{-\baselineskip}
+    \end{enumerate}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Outcome}&
-    \textbullet~The checkpoint allows the employee to pass through, if the authentication was successful and policy permits access; or \newline
-    \textbullet~The access is denied and the employee is informed about the denial.
+    \vspace{-\topsep}
+    \begin{itemize}[nolistsep, noitemsep, leftmargin=*]
+    \item The checkpoint allows the employee to pass through, if the authentication was successful and policy permits access; or
+    \item The access is denied and the employee is informed about the denial.\vspace*{-\baselineskip}
+    \end{itemize}
     \\
     \hline
      \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&\textbullet~Access attempt is logged in the system logs.\\
@@ -105,6 +127,10 @@
     \caption{Detailed specification of UC-2}
     \label{tab:useCase_02}
 \end{table}
+% 
+% 
+% 
+% 
 % 
 \begin{table}[htpb!]
     \footnotesize
@@ -129,21 +155,30 @@
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
-    \textbullet~A client connection between the external system and the \acrshort{acs} has been established. \newline
-    \textbullet~The policy permits the system to access user's protected resources.\newline
-    \textbullet~The user has previously signed in to the external system.
+    \vspace{-\topsep}
+    \begin{itemize}[nolistsep, noitemsep, leftmargin=*]
+        \item A client connection between the external system and the \acrshort{acs} has been established.
+        \item The policy permits the system to access user's protected resources.
+        \item The user has previously signed in to the external system.\vspace*{-\baselineskip}
+    \end{itemize}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Processing}&
-    \textbullet~The \acrshort{acs} verifies that the external system has been registered and has been assigned a client ID.\newline
-    \textbullet~The \acrshort{acs} verifies that the user is signed in or has previously singed in to the external system. This can be demonstrated with a refresh token.\newline
-    \textbullet~The \acrshort{acs} verifies that the policy permits the external system to access user's protected resources.\newline
-    \textbullet~If the previous conditions are met, the \acrshort{acs} issues an access token to the External client. The external client uses this token when querying the system for user's resources. The validity of the token is time bound and can be only used to request resources about the user it has been issued for.
+    \vspace{-\topsep}
+    \begin{enumerate}[nolistsep, noitemsep, leftmargin=*]
+        \item The \acrshort{acs} verifies that the external system has been registered and has been assigned a client ID.
+        \item The \acrshort{acs} verifies that the user is signed in or has previously singed in to the external system. This can be demonstrated with a refresh token.
+        \item The \acrshort{acs} verifies that the policy permits the external system to access user's protected resources.
+        \item If the previous conditions are met, the \acrshort{acs} issues an access token to the External client. The external client uses this token when querying the system for user's resources. The validity of the token is time bound and can be only used to request resources about the user it has been issued for.\vspace*{-\baselineskip}
+    \end{enumerate}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Outcome}&
-    \textbullet~The external system can read or modify user's resources, after it has successfully presented a valid access token; or \newline
-    \textbullet~Access was denied and the external system cannot manipulate user's protected resources.
+    \vspace{-\topsep}
+    \begin{itemize}[nolistsep, noitemsep, leftmargin=*]
+    \item The external system can read or modify user's resources, after it has successfully presented a valid access token; or
+    \item Access was denied and the external system cannot manipulate user's protected resources.\vspace*{-\baselineskip}
+    \end{itemize}
     \\
     \hline
      \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&
@@ -155,7 +190,11 @@
     \label{tab:useCase_10}
 \end{table}
 % 
-\begin{table}[htpb!]
+% 
+% 
+% 
+% 
+\begin{table}[htpb]
     \footnotesize
     \onehalfspacing
     \centering
@@ -178,20 +217,30 @@
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Pre-conditions}&
-    \textbullet~A client connection between the external system and the \acrshort{acs} has been established and a client secret has been issued to the external system.\newline
-    \textbullet~The client acting on behalf of the external system is web-server based.\newline
-    \textbullet~The policy permits the access to the protected resources.
+    
+    \vspace{-\topsep}
+    \begin{itemize}[nolistsep, noitemsep, leftmargin=*]
+        \item A client connection between the external system and the \acrshort{acs} has been established and a client secret has been issued to the external system.
+        \item The client acting on behalf of the external system is web-server based.
+        \item The policy permits the access to the protected resources.\vspace*{-\baselineskip}
+    \end{itemize}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Processing}&
-    \textbullet~The \acrshort{acs} verifies the client's client ID and client secret. \newline
-    \textbullet~The \acrshort{acs} verifies that the policy permits the external system to access enterprise protected resources.\newline
-    \textbullet~If the conditions are met, the \acrshort{acs} issues an Access Token to the External system client. The client presents this access token, when it is manipulating the protected resources. The access token has a limited validity and cannot be used for any other than requested resources, or after it's validity period has elapsed.
+    \vspace{-\topsep}
+     \begin{enumerate}[nolistsep, noitemsep, leftmargin=*]
+        \item The \acrshort{acs} verifies the client's client ID and client secret.
+        \item The \acrshort{acs} verifies that the policy permits the external system to access enterprise protected resources.
+        \item If the conditions are met, the \acrshort{acs} issues an Access Token to the External system client. The client presents this access token, when it is manipulating the protected resources. The access token has a limited validity and cannot be used for any other than requested resources, or after it's validity period has elapsed.\vspace*{-\baselineskip}
+     \end{enumerate}
     \\
     \hline
     \cellcolor[HTML]{CBCEFB}\textbf{Outcome}&
-    \textbullet~The external client obtained an access token and presented it in the request to manipulate the protected resource; or\newline
-    \textbullet~The external client has been denied access to the protected resources.
+    \vspace{-\topsep}
+    \begin{itemize}[nolistsep, noitemsep, leftmargin=*]
+        \item The external client obtained an access token and presented it in the request to manipulate the protected resource; or
+        \item The external client has been denied access to the protected resources.\vspace*{-\baselineskip}
+     \end{itemize}
     \\
     \hline
      \cellcolor[HTML]{CBCEFB}\textbf{Post-conditions}&

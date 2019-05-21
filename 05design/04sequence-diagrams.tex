@@ -23,8 +23,6 @@ In the last step of the Authentication stage, the \acrshort{aaserver} issues a s
 If the \acrshort{aaserver} receives a valid \acrshort{jwt} in the Access request, it does not carry out further authentication steps and proceeds directly to the Access Policy Evaluation stage. If the received \acrshort{jwt} is expired or otherwise invalid, the regular process described above applies.
 
 Figure~\ref{fig:authentication-flow} illustrates this process in a sequence diagram. User authentication with a physical key is shown, when logging in online to an external application, which corresponds to UC-1. When authenticating with a smartphone and when using a \acrshort{pacs}, the flow would be slightly different.
-% Please see Appendix
-% TODO Add reference to full figures in appendix.
 
 \paragraph{Authenticating to a \acrshort{pacs}} 
 When passing a physical checkpoint (described in UC-2), the authentication and policy evaluation must be speedy (as specified by RQ-20). The flow in this case must be adjusted, to fulfil this requirement.
@@ -36,7 +34,6 @@ The \acrshort{jwt} cannot be used and is omitted from the process. The authentic
     \centering
     \includegraphics[width=\textwidth]{authentication-flow}
     \caption{Authentication flow during online access control with a server-based client, using a physical authenticator. If the authentication is not successful, the \acrshort{aaserver} informs the client and the user about the unsuccessful authentication and does not continue to the Access policy evaluation stage.}
-    % TODO update figure with latest changes
     \label{fig:authentication-flow}
 \end{sidewaysfigure}
 \restoregeometry
@@ -55,9 +52,8 @@ Figure~\ref{fig:policy-evaluation} shows these interactions in a sequence diagra
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.55\textwidth]{policy-evaluation}
+    \includegraphics[width=.55\textwidth]{policy-evaluation2}
     \caption{Access Policy Evaluation stage. If a \acrshort{pacs} is the requester, then client ID is replaced with PACS ID (indicating which door is the user trying to open).}
-    % TODO update figure with latest changes
     \label{fig:policy-evaluation}
 \end{figure}
 
@@ -71,22 +67,29 @@ To deliver the ID token (and Access token) to an external client application, Au
 
 Once the ID token has been received and successfully verified by the client, the user is signed in using the information contained in the ID token, and may proceed to use the application. If necessary, the client application can use the access token to request additional information from the UserInfo endpoint. If the application requires manipulating with user's protected resources, it must include the access token in every request to the Resource endpoint.
 
-If the policy denies user access to the application, the \acrshort{aaserver} informs the user agent and the client about this and does not issue any tokens.
-
-Figure~\ref{fig:accessing-resource-ext} illustrates this flow in a sequence diagram. The flow is different, if the client application is native or user-agent-based.
+If the policy denies user access to the application, the \acrshort{aaserver} informs the user agent and the client about this and does not issue any tokens. Figure~\ref{fig:accessing-resource-ext} illustrates this flow in a sequence diagram. The flow is different, if the client application is native or user-agent-based.
 
 \paragraph{Internal client application and \acrshort{pacs}}
 If the requester is an internal application or a \acrshort{pacs}, a token is not necessary to access protected resources. In this case, the \acrshort{aaserver} simply informs the requester about the policy decision and this decision is then enforced directly by the application/\acrshort{pacs}.
 
-% TODO IMPORTANT - Add all the unused sequence diagrams to the appendixes
+\bigskip\noindent
+Due to many possible combinations of the authentication methods (smartphone, physical key), internal/external systems and client types (web-server based, user-agent based, native) we do not list all the possible flows in this section. Several additional diagrams are provided in Appendix~\ref{appendix:diagrams} for the following combinations:
+\begin{itemize}[noitemsep, nolistsep]
+    \item Opening door with physical key
+    \item Opening door with a smartphone
+    \item Accessing an external online system with a native client
+    \item Accessing an external online system with a web-server based client
+    \item Accessing an internal online system with a web-server based client
+\end{itemize}
+
+\bigskip\noindent
+In this chapter, components of the proposed system and their functionality are presented. Selected use cases are described, which should be implemented in the prototype, demonstrating the functionality of the system. Flows during authentication, policy evaluation and policy enforcement document the exchange of information among the system components. These flows are used as an input to guide the implmentation, which is described in the following chapter.
 
 \newgeometry{left=1.2cm,right=1.2cm,top=1cm,bottom=1cm,footskip=.4cm}
 \begin{sidewaysfigure}[p]
     \centering
     \includegraphics[width=\textwidth]{accessing-resource-ext}
     \caption{Sign-in and access token issuance process to external server-based client application.}
-    % TODO update figure with latest changes
     \label{fig:accessing-resource-ext}
 \end{sidewaysfigure}
 \restoregeometry
-

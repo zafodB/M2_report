@@ -1,26 +1,23 @@
 \subsection{Problem formulation} \label{problemFormulation}
-The motivation for this project comes from the existing split of online and physical access control systems. Secondary, the low security of passwords has been demonstrated by several phishing cases and their use is discouraged.
-% TODO add reference here
-Alternative ways of strong authentication have been proposed instead, including physical cryptographic devices.
-% TODO add reference here
-The banking industry, which has been using similar tokens for a long period of time already (credit cards), has now witnessed the migration of these tokens to smartphones, mainly for user convenience.
-% TODO add reference here
-Such migration is also technically possible in access control scenarios, although its use has been limited in practice.
+The motivation for this project comes from the existing split of online and physical access control systems. Secondary, the low security of passwords has been demonstrated by several phishing cases and their use is discouraged~\cite{Huang2011UsingAttacks, Paul2010OAuthAnti-pattern}. Alternative ways of strong authentication have been proposed instead, including physical cryptographic devices~\cite{FIDOFIDO2Project}.
+
+The banking industry, which has been using similar tokens for a long period of time already (credit cards), has now witnessed the migration of these tokens to smartphones, mainly for user convenience\footnote{\url{https://pay.google.com/about/}, \url{https://www.apple.com/apple-pay/}, accessed 21 May 2019}. Such migration is also technically possible in access control scenarios, although its use has been limited in practice.
 
 Taking into account the challenges and issues mentioned previously, we propose an innovative \acrshort{acs} that addresses these issues, by building on top of state-of-the-art technologies in the field. The problem formulation is as follows:
 
 \begin{center}
-    \textit{“How to design an Access control system, combining both physical and online access control, that includes strong authentication and enables the use of smartphone?”}
+    \textit{“How to design and implement an Access control system that supports both physical and online access control?}
 \end{center}
 
 \paragraph{Sub-questions}
 We define the following sub-problems to help guide us in the analysis and design of the system:
 
-% TODO Is this still draft?
 \begin{itemize}[noitemsep]
-    \item What solutions are there on the market?
-    \item What is the system architecture?
-    \item Which technologies are the best for proposed system?
-    \item Which components of the system must be implemented for MVP?
-    \item What are the requirements of the system?
+    \item How to include the support for both smartphones and physical tokens in the system?
+    \item Which technologies should be used for such a system?
+    \item What would be the requirements of such a system?
+    \item How should the system architecture be?
+    \item How to implement a prototype, which would demonstrate the functionality of the system?
+    % \item Which components of the system must be implemented for MVP?
+    % \item What are the requirements of the system?
 \end{itemize}

@@ -15,6 +15,8 @@
 \usepackage{setspace}
 % \usepackage{listings}
 \usepackage{epigraph}
+
+\usepackage{lscape}
 \usepackage{rotating}
 % \usepackage{framed}
 % To have two column glossary
@@ -65,22 +67,22 @@
 \pagebreak
 
 \pagenumbering{arabic}
-\include{01Introduction/00introduction}
-\pagebreak
-\include{02Methodology/00methodology}
-\pagebreak
+% \include{01Introduction/00introduction}
+% \pagebreak
+% \include{02Methodology/00methodology}
+% \pagebreak
 \include{03sota/000sota}
 \pagebreak
 \include{04analysis/00analysis}
 \pagebreak
-\include{05design/00design}
+\include{05design/000design}
 \pagebreak
-\include{06implementation/00implementation}
-\pagebreak
-\include{09Discussion/00discussion}
-\pagebreak
-\include{10conclusion/00conclusion}
-\pagebreak
+% \include{06implementation/00implementation}
+% \pagebreak
+% \include{09Discussion/00discussion}
+% \pagebreak
+% \include{10conclusion/00conclusion}
+% \pagebreak
 
 \printbibliography[heading=bibintoc]
 
@@ -95,8 +97,8 @@
 \input{99appendix/02xacml-figures}
 \newgeometry{left=2cm,right=2cm,top=1cm,bottom=1cm,footskip=.4cm}
 \input{99appendix/03use-case-diagram}
-% \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
-% \input{15Appendixes/03apendixD.tex}
+\newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
+\input{99appendix/04sequence-diagrams}
 % \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm,footskip=.4cm}
 \restoregeometry
 
